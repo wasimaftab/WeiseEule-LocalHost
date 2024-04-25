@@ -1,0 +1,150 @@
+/* Style for mark keywords */
+mark { 
+  /* background-color: #FBB3FE; */
+  background-color: #b89cff;
+  color: black;
+}
+
+/* Style for Chat window */
+#action-card {
+  /* position: absolute; */
+  position: fixed;
+  display: none;
+  z-index: 9999;
+  /* background-color: #DAF7A6;  */
+  background-color: #f4e2f9;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#copy-button,
+#summarize-button {
+  /* background-color: #4CAF50;  */
+  background-color: #efbbff;
+
+  border: none;
+  /* color: white; */
+  color: black;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+}
+
+#copy-button:hover,
+#summarize-button:hover {
+  /* background-color: #45a049; */
+  background-color: #da96ef;
+}
+
+
+/*----#### additional css rules ####----*/
+#navigation-bar {
+  /* background-color: #0047AB; */
+  background-color: #6a759a;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  /* Align items to the center */
+  justify-content: left;
+  /* Align items to the left */
+  align-items: center;
+  gap: 10px;
+  /* Spacing between each item */
+}
+
+
+#file-input,
+#navigation-bar button {
+  background-color: #99C1F1;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#navigation-bar label {
+  color: black;
+  font-weight: bold;
+}
+
+#navigation-bar input[type="number"] {
+  color: black;
+  background-color: #99C1F1;
+  font-weight: bold;
+}
+
+
+#file-upload-label {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#go-to-page {
+  width: 50px;
+}
+
+#viewerContainer, #summary-card {
+  height: inherit;
+  margin: inherit;
+  /* position:inherit;   */
+}
+
+#pdf_area {
+  display: flex;
+  justify-content: space-between;
+}
+
+#summary-card {
+  z-index: 9999;
+  width: 25%; /* adjust as needed */
+  padding: 1em;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+#summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+#summary-header h3 {
+  margin: 0;
+}
+
+#close-summary {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #dc3545;
+  font-size: 1.5em;
+  line-height: 1;
+  transition: color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 50%;  /* Makes the button round */
+  padding: 0.2em;      /* Provides space for the shadow */
+}
+
+#close-summary:hover {
+  color: #bd2130;
+  box-shadow: 0 0 0.5rem rgba(128, 128, 128, 0.25); /* Changes the shadow color to grey */
+  background-color: #DCDCDC;
+}
+
+#summary-content {
+  white-space: pre-wrap;  /* Preserve line breaks and spaces in the text */
+}

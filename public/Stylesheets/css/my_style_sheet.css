@@ -1,0 +1,432 @@
+/* Use this class in Sweet Alert to left align texts */
+.align-left {
+  text-align: left;
+}
+
+.my-swal {
+  z-index: 10001 !important;
+}
+
+.tippy-box[data-theme~="my-tippy-theme"] {
+  background-color: #c0bfec;   /* your desired bg color */
+  color: #000000;   /* your desired text color */
+}
+
+.tippy-box[data-theme~="my-tippy-theme"] .tippy-arrow {
+  color: #c0bfec;  
+}
+
+/* START Modal style for datatable */
+#dataModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+#dataModal-content {
+  width: 90%; /* Adjust width to be responsive */
+  max-width: 80vw; /* Maximum width as 80% of viewport width */
+  max-height: 80vh; /* Maximum height as 80% of viewport height */
+  overflow-y: auto; /* Scrollable content if it overflows */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative; /* Establishes a stacking context for child elements */
+}
+
+#dataModal-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  position: absolute; /* Absolute positioning related to the modal content */
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+}
+
+#dataModal-close:hover, #dataModal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+table#dataTable {
+  width: 100%; /* Ensure table spans the entire width of the modal content */
+}
+/* END Modal style for datatable */
+
+
+
+/* Modal style for login */
+#modal-content-login {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  position: absolute;
+  left: 60%;
+  top: 40%;
+  transform: translate(-50%, 15%);
+}
+
+
+/* Modal style for setting params */
+#modal-content-params {
+  width: 100%;
+  padding: 0px;
+}
+
+#flex-container-params {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+
+#flex-container-params > *:not(:last-child):not(#flex-row-params-wrap) {
+  margin-bottom: 20px;
+}
+
+#flex-row-params-wrap {
+  margin-bottom: 20px; /* adjust this as needed */
+}
+
+#flex-row-params,
+#flex-row-params-wrap {
+  display: flex;
+  justify-content: space-between;
+  border: none;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.parameter {
+  flex: 0 1 calc(100% - 40px); 
+}
+
+#select_rows_table,
+#set_temp,
+#select_fix_keyword,
+#select_answer_per_paper,
+#select_chunks_from_one_paper,
+#set_top_k,
+#set_paper_id,
+#select_embedd_model,
+#select_rerank {
+  height: 40px;
+  color: black;
+  /* background-color: #d6d7d8; */
+  border: black solid 1px !important;
+  width: 50%;
+  margin-left: 20px;
+  /* border: #343A40 solid 1px !important; */
+}
+
+#template {
+  border: black solid 1px !important;
+  margin-left: 20px;
+}
+
+#label_param_heading{
+  margin-left: 20px;
+}
+
+/* Begin: styles for footer and side window area */
+#nav_fetch_articles {
+  margin-top: 20px;
+}
+
+#datepicker {
+  margin-top: 10px;
+  margin-left: 5px;
+  width: 220px;
+}
+
+#start-date {
+  text-align: center;
+  height: 40px;
+  width: 100px;
+  margin-left: 5px;
+  border: black solid 1px !important;
+  border-radius: 5px;
+  background-color: #d6d7d8;
+}
+
+#end-date {
+  text-align: center;
+  height: 40px;
+  width: 100px;
+  margin-left: 5px;
+  border: black solid 1px !important;
+  border-radius: 5px;
+  background-color: #d6d7d8;
+}
+
+#select_llm {
+  height: 40px;
+  color: black;
+  margin-left: 10px;
+  background-color: #d6d7d8;
+  border: black solid 1px !important;
+  /* border: #343A40 solid 1px !important; */
+}
+
+#select_namespace {
+  height: 40px;
+  color: black;
+  margin-left: 10px;
+  background-color: #d6d7d8;
+  border: black solid 1px !important;
+  /* border: #343A40 solid 1px !important; */
+}
+
+#search_namespace{
+  color: black;
+  margin-left: 10px;
+  width: 200px;
+  height: 40px;
+  background-color: #d6d7d8;
+  border: black solid 1px !important;
+}
+
+#keywords{
+  color: black;
+  margin-left: 10px;
+  width: 200px;
+  height: 50px;
+  background-color: #d6d7d8;
+  border: black solid 1px !important;
+}
+
+#button_get_answer {
+  margin-left: 10px;
+  margin-top: 10px;
+  background-color: #cabcda;
+  border: black solid 2px !important;
+}
+
+#button_fetch_articles, #button_search_namespace {
+  background-color: #cabcda;
+  /* border-radius: 5px; */
+  border: black solid 2px !important;
+}
+
+#button-progress-container {
+  display: flex;
+  /* this will arrange the button and the progress bar side by side */
+  align-items: center;
+  /* align vertically */
+  justify-content: space-between;
+  /* put some space between button and progress bar */
+  width: fit-content;
+  /* take the width as per content, you can adjust as needed */
+  gap: 20px;
+  /* optional: put some gap between button and progress bar */
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.progress-bar {
+  width: 100px;
+  /* adjust the width as needed */
+  height: 10px;
+  /* adjust the height as needed */
+  /* background-color: #f3f3f3; */
+  /* background-color: #b2b8ef; */
+  /* border: 1px solid #bbb; */
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar::before {
+  content: "";
+  display: block;
+  height: 100%;
+  /* background-color: #bbb; */
+  background-color: #cabcda;
+  width: 100%;
+  animation: progress-bar-animation 1s infinite linear;
+  /* animation: progress-bar-animation 2s infinite linear; */
+}
+
+@keyframes progress-bar-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+#footer {
+  background-color: #383c44;
+}
+
+#loadGH2 {
+  color: #d6d7d8;
+}
+
+/* End: styles for footer and side window area */
+
+/* Begin: styles for main window app area */
+
+#content_wrapper {
+  padding-bottom: 5px;
+}
+
+#container_fluid_outer {
+  padding-bottom: 0px;
+}
+
+#chat_panel {
+  background-color: #d6d7d8;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  /* height: 100%; */
+  /* height: 100vh; */
+}
+
+#fluid_container1 {
+  display: flex;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+#app {
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  border: 1px solid black;
+  padding: 0px;
+  background-color: #a9a9a9;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+}
+
+#chat-area {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  overflow-y: auto;
+  /* max-height: 800px; */
+  max-height: 70vh;
+}
+
+#user-input-area {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-field-wrapper {
+  max-width: 1000px;
+  /* Change this to your preferred maximum width */
+  width: 100%;
+  margin: 0 auto;
+  /* This will center the element */
+}
+
+.input-icon-wrapper {
+  position: relative;
+}
+
+#user-input {
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid black;
+  outline: none;
+  background-color: rgb(212, 209, 200);
+}
+
+#send-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  padding: 0;
+}
+
+.message-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-icon {
+  /* styling for the user icon goes here */
+  width: 32px;
+  height: 32px;
+  background-image: url("../../Icon/user-logo.png");
+  /* path to your user logo */
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.bot-icon {
+  /* styling for the bot icon goes here */
+  width: 32px;
+  height: 32px;
+  background-image: url("../../Icon/bot-logo.png");
+  /* path to your bot logo */
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.message {
+  border-radius: 20px;
+  padding: 10px;
+  line-height: 1.4;
+  width: 80%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-top: 20px;
+  flex-grow: 1;
+  /* This will make the message box take up the remaining space in its container */
+}
+
+.bot-message {
+  background-color: #cdc6d4;
+  border: 2px solid black;
+  color: black;
+}
+
+.user-message {
+  background-color: rgb(212, 209, 200);
+  border: 2px solid black;
+}
+
+/* Width of chat area when application is in full screen mode */
+@media screen and (min-width: 1200px) {
+  #app {
+    width: 90%;
+  }
+}
+
+/* End: styles for main window app area */
