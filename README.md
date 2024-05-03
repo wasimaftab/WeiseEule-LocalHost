@@ -2,3 +2,5 @@
 
 # Keyword frequency driven RAG for closed domain question answering
 
+## For information on how to make the WeiseEule app run on your local machine refer to the following document
+https://github.com/wasimaftab/WeiseEule-LocalHost/blob/main/Additional%20file%202.pdf
