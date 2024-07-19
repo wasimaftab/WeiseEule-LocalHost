@@ -8,12 +8,15 @@ export default defineConfig({
     outDir: 'dist',
   },
   server: {
+    // host: '0.0.0.0',
     port: 9000,
-    // port: 9001,
-
     open: true,
     proxy: {
-      '/api': { target: 'http://localhost:3000' },
+      '/api': { 
+        // target: 'http://127.0.0.1:3000' ,
+        target: 'http://localhost:3000', // this points to Express server
+        changeOrigin: true
+	},
     },
   },
   resolve: {

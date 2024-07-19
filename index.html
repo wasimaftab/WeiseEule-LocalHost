@@ -15,9 +15,7 @@
   <script src="resources/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE -->
   <script src="resources/AdminLTE-3.0.5/dist/js/adminlte.min.js"></script>
-  <!-- dataTables -->
-  <script src="resources/dataTables/jquery.dataTables.js"></script>
-  <script src="resources/dataTables/dataTables.responsive.min.js"></script>
+
 
   <!-- REQUIRED CSS -->
   <link rel="stylesheet" type="text/css" href="Stylesheets/css/my_style_sheet.css">
@@ -25,9 +23,27 @@
   <link rel="stylesheet" href="resources/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="resources/AdminLTE-3.0.5/dist/css/adminlte.min.css">
-  <!-- dataTables style -->
-  <link rel="stylesheet" href="resources/dataTables/jquery.dataTables.css">
-  <link rel="stylesheet" type="text/css" href="resources/dataTables/responsive.dataTables.min.css">
+
+  <!-- REQUIRED JS & CSS for dataTable -->
+  <!-- JS -->
+  <script src="resources/dataTables/jquery.dataTables.js"></script>
+  <!-- <script src="resources/dataTables/dataTables.responsive.min.js"></script> -->
+
+  <script src="resources/dataTables/dataTables.js"></script>
+  <script src="resources/dataTables/dataTables.select.js"></script>
+  <script src="resources/dataTables/select.dataTables.js"></script>
+  
+  <script src="resources/dataTables/dataTables.buttons.js"></script>
+  <script src="resources/dataTables/buttons.dataTables.js"></script>
+
+  <!-- CSS -->
+  <!-- <link rel="stylesheet" href="resources/dataTables/jquery.dataTables.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="resources/dataTables/responsive.dataTables.min.css"> -->
+
+  <link rel="stylesheet" type="text/css" href="resources/dataTables/dataTables.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="resources/dataTables/select.dataTables.css">
+
+  <link rel="stylesheet" type="text/css" href="resources/dataTables/buttons.dataTables.css">
 
 
   <!-- REQUIRED JS & CSS for PDF viewer -->
@@ -87,7 +103,8 @@
                         <option>gpt-3.5-turbo</option>
                         <option>gpt-3.5-turbo-1106</option>
                         <option>gpt-4</option>
-                        <option selected="selected">gpt-4-1106-preview</option>
+                        <option>gpt-4-1106-preview</option>
+                        <option selected="selected">gpt-4o</option>
                       </select>
 
                       <h6 style="color:#d6d7d8; margin-top: 15px;  margin-left: 10px;">Select namespace <i
@@ -95,6 +112,14 @@
                       <select name="select_namespace" id="select_namespace"
                         class="input-small w-50 inputfield form-control form-rounded">
                       </select>
+
+                      <!-- <h6 style="color:#d6d7d8; margin-top: 15px;  margin-left: 10px;">Search PubMed <i
+                          class="far fa-question-circle" id="tooltip_review_mode" style="color:#d6d7d8"></i></h6>
+                      <select name="review mode" id="review_mode"
+                        class="input-small w-50 inputfield form-control form-rounded">
+                        <option>True</option>
+                        <option selected="selected">False</option>
+                      </select> -->
 
                       <h6 style="color:#d6d7d8; margin-top: 15px;  margin-left: 10px;">Set advanced params <i
                           class="far fa-question-circle" id="tooltip_advanced_params" style="color:#d6d7d8"></i></h6>
@@ -128,7 +153,6 @@
                       <input id="search_namespace" class="form-control form-control-sm w-50" type="text"
                         placeholder="Enter a PMID..."></input>
 
-                      <!-- GO button and intermediate progress bar side by side -->
                       <div id="button-progress-container">
                         <!-- <button id="button_fetch_articles">GO</button> -->
                         <button id="button_search_namespace" class="border rounded"
@@ -166,23 +190,12 @@
                         <input type="text" id="start-date" placeholder="Start Date">
                         <input type="text" id="end-date" placeholder="End Date">
                       </div>
-                      <!-- <button id="button_fetch_articles" class="border rounded">GO</button> -->
-                      <!-- intermediate progress bar -->
-                      <!-- <div id="progress-container" style="margin-top: 15px; margin-left: 15px; width: 80%;"
-                        class="d-none">
-                        <div class="progress">
-                          <div id="fetch_article_progress"
-                            class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: 100%">
-                          </div>
-                        </div>
-                      </div> -->
-                      <!-- GO button and intermediate progress bar side by side -->
-                      <div id="button-progress-container">
+
+                      <div id="button-progress-container2">
                         <!-- <button id="button_fetch_articles">GO</button> -->
                         <button id="button_fetch_articles" class="border rounded"
                           style="width: 50px; height: 40px;">GO</button>
-                        <div id="progress-container" class="hidden">
+                        <div id="progress-container2" class="hidden">
                           <div class="progress-bar"></div>
                         </div>
                       </div>
@@ -205,10 +218,16 @@
         <div class="row">
           <div class="col-12">
             <!-- tabs -->
-            <ul id="tab_panels" class="nav nav-tabs" role="tablist">
+            <!-- <ul id="tab_panels" class="nav nav-tabs" role="tablist"> -->
+            <ul id="tab_panels" class="nav nav-pills" role="tablist">
+              <!-- <ul id="tab_panels" class="nav nav-pills flex-column flex-sm-row" role="tablist"> -->
               <li class="nav-item">
                 <a href="#chat_panel" aria-controls="chat_panel" role="tab" data-toggle="tab"
                   class="nav-link active"><b>Chat</b></a>
+              </li>
+              <li class="nav-item">
+                <a href="#search_panel" aria-controls="search_panel" role="tab" data-toggle="tab"
+                  class="nav-link"><b>Search</b></a>
               </li>
               <li class="nav-item">
                 <a href="#pdf_panel" aria-controls="pdf_panel" role="tab" data-toggle="tab"
@@ -225,9 +244,36 @@
                         <div class="input-group">
                           <div class="input-field-wrapper">
                             <div class="input-icon-wrapper">
-                              <input id="user-input" type="text" placeholder="Type a message...">
+                              <!-- <input id="user-input" type="text" placeholder="Type a question..."> -->
+                              <textarea id="user-input" name="text" wrap="soft"
+                                placeholder="Query matching PubMed Ids..."></textarea>
                               <button id="send-button">
                                 <i class="fas fa-paper-plane"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tabpanel for search -->
+              <div role="tabpanel" class="tab-pane py-3" id="search_panel">
+                <div class="container-fluid py-1 justify-content-center" id="fluid_container2">
+                  <div id="search_app" class="container-inner justify-content-center">
+                    <div id="search-area">
+                      <div id="search-input-area">
+                        <div class="input-group">
+                          <div class="input-field-wrapper">
+                            <div class="input-icon-wrapper">
+                              <!-- <input id="search-input" type="text" placeholder="Query matching PubMed Ids..."> -->
+                              <textarea id="search-input" name="text" wrap="soft"
+                                placeholder="Query matching PubMed Ids..."></textarea>
+                              <button id="search-pubmed-button">
+                                <!-- <i class="fas fa-paper-plane"></i> -->
+                                <i class="fas fa-search"></i>
                               </button>
                             </div>
                           </div>
@@ -310,7 +356,7 @@
           </thead>
           <tbody></tbody>
         </table>
-        <button id="getIndicesBtn">Get Indices</button>
+        <!-- <button id="getIndicesBtn">Get Indices</button> -->
       </div>
     </div>
     <!-- END Modal for ranked table -->
@@ -334,7 +380,7 @@
               <div class="parameter">
                 <label id="label_param_heading" for="set_top_k">Top k (>=1)</label>
                 <i class="far fa-question-circle" id="tooltip_top_k" style="color:#000000"></i>
-                <input id="set_top_k" class="input-small inputfield form-control form-rounded" type="number" value="1"
+                <input id="set_top_k" class="input-small inputfield form-control form-rounded" type="number" value="10"
                   step="1" min="1">
               </div>
 
@@ -356,6 +402,7 @@
                 <i class="far fa-question-circle" id="tooltip_embedd_model" style="color:#000000"></i>
                 <select name="select_embedd_model" id="select_embedd_model"
                   class="input-small w-50 inputfield form-control form-rounded">
+                  <option>MedCPT</option>
                   <option>biobert</option>
                   <!-- <option>openai</option> -->
                 </select>
@@ -376,8 +423,8 @@
                 <i class="far fa-question-circle" id="tooltip_rerank" style="color:#000000"></i>
                 <select name="select_rerank" id="select_rerank"
                   class="input-small w-50 inputfield form-control form-rounded">
-                  <option>True</option>
                   <option>False</option>
+                  <option>True</option>
                 </select>
               </div>
 
@@ -503,14 +550,14 @@
 <script>
   document.getElementById('loadGH').addEventListener('click', function (e) {
     e.preventDefault();
-    window.open('https://github.com/wasimaftab/WeiseEule', '_blank');
+    window.open('https://github.com/wasimaftab/WeiseEule-LocalHost', '_blank');
   });
 </script>
 
 <script>
   document.getElementById('loadGH2').addEventListener('click', function (e) {
     e.preventDefault();
-    window.open('https://github.com/wasimaftab/WeiseEule', '_blank');
+    window.open('https://github.com/wasimaftab/WeiseEule-LocalHost', '_blank');
   });
 </script>
 

@@ -288,16 +288,17 @@ for record in all_texts:
 ##---------------------- Now push vectors into pinecone ---------------------##
 # pdb.set_trace()
 namespace = local_db_name
-embedd_model = "biobert"
+# embedd_model = "biobert"
+embedd_model = "MedCPT"
 try:
     pmcd.push_vectors_into_pinecone(all_texts_citated,
-                               namespace,
-                               embedd_model)
+                                    namespace,
+                                    embedd_model)
             
     pmcd.update_all_rows(local_db_path,
-                    table_name,
-                    column_name="processed",
-                    new_value=1)
+                        table_name,
+                        column_name="processed",
+                        new_value=1)
         
     msg = f"Vectors pushed successfully into pinecone DB"
     print(msg)

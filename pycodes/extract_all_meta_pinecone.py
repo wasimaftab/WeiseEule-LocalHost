@@ -70,6 +70,8 @@ def get_all_matches_from_index(index, num_dimensions, namespace=""):
         for l in alist:
             records.append(l)
     return {"all_matches": records, "all_ids": all_ids}
+##########################################################
+##########################################################
 
 index = pmcd.get_pinecone_index()
 

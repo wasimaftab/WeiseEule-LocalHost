@@ -6,25 +6,463 @@ import 'tippy.js/dist/tippy.css'
 import Swal from 'sweetalert2'
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-
+// let wsUrl = "ws://localhost:8000/stream_answer";
+let wsUrl = "ws://localhost:8000/ws";
+// let wsUrl = "wss://www.weiseeule.info/ws";
+let ws; // Declare WebSocket variable outside to manage its state
 
 let count_next = 0;
 let count_prev = 0;
 let count = 0;
-let rerank_count = 0;
-
+let tableCounter = 0; // Counter to ensure unique table IDs
 /* ----##### USER DEFINED FUNCTIONS START #####---- */
-function createMessageContainerElements() {
-	let chatArea = document.getElementById('chat-area');
-	let messageContainer = document.getElementById('message-container');
+function appendDataFrame(df) {
+	const parsedData = JSON.parse(df);
+	var modal = document.getElementById("dataModal");
+	var span = document.getElementById("dataModal-close");
+
+	span.onclick = function () {
+		modal.style.display = "none";
+		$('#dataTable').off('click', 'tbody tr');
+	}
+
+	// Check and Destroy Previous DataTable Instances
+	if ($.fn.DataTable.isDataTable('#dataTable')) {
+		$('#dataTable').DataTable().destroy();
+		$('#dataTable tbody').empty();
+		$('#dataTableHeaders').empty();
+	}
+
+	// Use parsedData.columns directly since it's already an array
+	var columnsDef = parsedData.columns.map(col => ({ title: col }));
+
+	// Dynamically generate table headers
+	parsedData.columns.forEach(col => {
+		$('#dataTableHeaders').append('<th>' + col.replace(/_/g, ' ').charAt(0).toUpperCase() + col.slice(1) + '</th>');
+	});
+
+	// Initialize DataTable
+	var table = $('#dataTable').DataTable({
+		data: parsedData.data,
+		columns: columnsDef,
+		order: [],
+		responsive: true
+	});
+
+	/* Show the modal upon successful DataFrame reception */
+	// modal.style.display = "block";
+	// $('#dataModal').show();
+
+	/* In the updated code hide the DataFrame */
+	$('#dataModal').hide();
+}
+/* #################################################### */
+
+/* Append search DataFrame as DataTable separately for each question */
+function appendSearchDataFrame(df, container, query) {
+	const parsedData = JSON.parse(df);
+
+	// Increment the table counter to create a unique ID
+	tableCounter++;
+	const tableId = `dataTableSearch${tableCounter}`;
+
+	// Create table structure
+	const table = document.createElement('table');
+	table.id = tableId;
+	table.className = 'display'; // Only use display class if necessary
+
+	const thead = document.createElement('thead');
+	const tr = document.createElement('tr');
+
+	// Add a header for the checkbox column
+	const thCheckbox = document.createElement('th');
+	thCheckbox.innerHTML = '';
+	tr.appendChild(thCheckbox);
+
+	parsedData.columns.forEach(col => {
+		const th = document.createElement('th');
+		th.textContent = col.replace(/_/g, ' ').charAt(0).toUpperCase() + col.slice(1);
+		tr.appendChild(th);
+	});
+
+
+	thead.appendChild(tr);
+	table.appendChild(thead);
+
+	const tbody = document.createElement('tbody');
+	table.appendChild(tbody);
+
+	container.appendChild(table);
+
+	// Map data to match DataTables format and add checkboxes
+	const data = parsedData.data.map(row => {
+		return ['', ...row];
+	});
+
+	// Initialize DataTable with unique ID
+	$(`#${tableId}`).DataTable({
+		data: data,
+		columns: [
+			{ title: '', orderable: false }, // Checkbox column
+			...parsedData.columns.map(col => ({ title: col }))
+		],
+		columnDefs: [
+			{
+				orderable: false,
+				render: DataTable.render.select(),
+				targets: 0
+			}
+		],
+		order: [],
+		fixedColumns: {
+			start: 2
+		},
+		select: {
+			style: 'multi',
+			selector: 'td:first-child'
+		},
+		responsive: true,
+		layout: {
+			topStart: {
+				buttons: [
+					{
+						text: 'Summarize',
+						action: function () {
+							// Create a div to display the PMIDs
+							const summaryDiv = document.createElement('div');
+							summaryDiv.id = `summaryDiv${tableCounter}`;
+							container.appendChild(summaryDiv);
+
+							var my_table = $(`#${tableId}`).DataTable();
+							let count = my_table.rows({ selected: true }).count();
+							let selected_data = my_table.rows({ selected: true }).data();
+							console.log(count + ' row(s) selected');
+
+							// Initialize the new array to store the extracted numbers
+							let extractedNumbers = [];
+
+							// Iterate through each element in the selected_data array
+							for (var i = 0; i < selected_data.length; i++) {
+								console.log('selected_data[' + i + ']:- ', selected_data[i]);
+								console.log('selected_data[' + i + '][1]:- ', selected_data[i][1]);
+								let parts = selected_data[i][1].split('>');
+								if (parts.length > 1) {
+									let numberPart = parts[1].split('<')[0];
+									console.log('numberPart:-', numberPart);
+									extractedNumbers.push(numberPart);
+								}
+							}
+							// Output the new array
+							console.log('extractedNumbers:-', extractedNumbers); // Output: ["34000094", "34000005"]
+
+							// Send the selected PMIDs to the backend for processing
+							sendPMIDsToBackend(extractedNumbers.join(','), `summaryDiv${tableCounter}`, query);
+						}
+					}
+				]
+			}
+		}
+	});
+
+	// Add dynamic CSS rules
+	addDynamicTableStyles(tableId);
+}
+
+
+// Function to send PMIDs to python backend based on checkbox selection
+function sendPMIDsToBackend(pmids, summaryDivId, query) {
+	var llm = document.getElementById('select_llm').value;
+	ws = new WebSocket(wsUrl + "/summarize_abstracts");
+
+	const params = {
+		llm: llm,
+		pmids: pmids,
+		query: query
+	}
+
+	ws.onopen = () => {
+		console.log("WebSocket connection opened.");
+		ws.send(JSON.stringify(params));
+
+		// Clear the previous summary content below the "Summary:" heading
+		const summaryDiv = document.getElementById(summaryDivId);
+		summaryDiv.innerHTML = "<strong>Summary:</strong><br>";
+	};
+
+	ws.onmessage = (event) => {
+		const data = JSON.parse(event.data);
+		const { summary, error, end_summary } = data;
+
+		if (error) {
+			console.error(error);
+			Swal.fire({
+				icon: 'error',
+				title: "Error in summarization",
+				text: error,
+				allowOutsideClick: false
+			});
+			return;
+		}
+
+		if (summary) {
+			document.getElementById(summaryDivId).innerHTML += summary;
+		}
+
+		if (end_summary) {
+			console.log("End of Summary");
+			ws.close();
+		}
+	};
+
+	ws.onclose = () => {
+		console.log("WebSocket connection closed.");
+	};
+
+	ws.onerror = (error) => {
+		console.error("WebSocket error:", error);
+		ws.close();
+	};
+}
+
+/* #################################################### */
+
+function addDynamicTableStyles(tableId) {
+	const style = document.createElement('style');
+	// style.type = 'text/css';
+	style.innerHTML = `
+        #${tableId} {
+            width: 100% !important;
+            border-collapse: collapse !important;
+        }
+        #${tableId} th {
+            background-color: #7491c4;
+            color: black;
+        }
+        #${tableId} tbody tr:nth-child(odd) {
+            background-color: #c2b4d2;
+        }
+        #${tableId} tbody tr:nth-child(even) {
+            background-color: rgb(222, 206, 235);
+        }
+        #${tableId} tbody tr:hover {
+            background-color: #9bbffc;
+        }
+        #${tableId} th, #${tableId} td {
+            padding: 8px;
+            // border: 1px solid #005eff;
+			border: 1px solid #A0AFB7;
+            text-align: left;
+        }
+    `;
+	document.getElementsByTagName('head')[0].appendChild(style);
+}
+/* #################################################### */
+
+function setupChatElements(ws, params) {
+	// Prepare message containers for chat
+	const elements = createMessageContainerElements('chat-area');
+	ws.chatArea = elements.chatArea;
+	ws.messageContainer = elements.messageContainer;
+
+	const userElements = createUserMessageElements();
+	ws.userMessageContainer = userElements.userMessageContainer;
+	ws.userMessage = userElements.userMessage;
+
+	const botElements = createBotMessageElements();
+	ws.botMessageContainer = botElements.botMessageContainer;
+	ws.botMessage = botElements.botMessage;
+
+	// Display user's query
+	ws.userMessage.textContent = params.query;
+	ws.userMessageContainer.appendChild(ws.userMessage);
+	ws.messageContainer.appendChild(ws.userMessageContainer);
+
+	let formattedMessage = "<b>Answer:</b><br>";
+	ws.botMessage.innerHTML += formattedMessage;
+	ws.botMessageContainer.appendChild(ws.botMessage);
+	ws.messageContainer.appendChild(ws.botMessageContainer);
+}
+
+function setupSearchElements(ws, params) {
+	// Prepare message containers for search
+	const elements = createMessageContainerElements('search-area');
+	ws.searchArea = elements.chatArea;
+	ws.messageContainer = elements.messageContainer;
+
+	const userElements = createUserMessageElements();
+	ws.userMessageContainer = userElements.userMessageContainer;
+	ws.userMessage = userElements.userMessage;
+
+	const botElements = createBotMessageElements();
+	ws.botMessageContainer = botElements.botMessageContainer;
+	ws.botMessage = botElements.botMessage;
+
+	// Display user's query
+	ws.userMessage.textContent = params.query;
+	ws.userMessageContainer.appendChild(ws.userMessage);
+	ws.messageContainer.appendChild(ws.userMessageContainer);
+
+	let formattedMessage = "<b>Top 10 Relevant PMIDs:</b><br><br>";
+	ws.botMessage.innerHTML += formattedMessage;
+	ws.botMessageContainer.appendChild(ws.botMessage);
+	ws.messageContainer.appendChild(ws.botMessageContainer);
+}
+/* #################################################### */
+
+function handleSearchPubmedMessage(event, ws, params) {
+	/* Stop loader on first message */
+	Swal.close();
+
+	/* Scroll search area top to make strem visble continuously */
+	ws.searchArea.scrollTop = ws.searchArea.scrollHeight;
+
+	const data = JSON.parse(event.data);
+	const { content, citation, last_content, error, df } = data;
+
+	if (error) {
+		console.error(error);
+		Swal.fire({
+			icon: 'error',
+			title: "Error in PubMed Search",
+			text: error,
+			allowOutsideClick: false
+		});
+		ws.close();
+		// return;
+	}
+
+	let formattedMessage = "";
+
+	if (citation) {
+		formattedMessage = "<br><br><b>Citation:</b><br>" + citation;
+		ws.botMessage.innerHTML += formattedMessage;
+	}
+
+	if (content) {
+		ws.botMessage.innerHTML += content;
+	}
+
+	if (df) {
+		console.log('Received dataframe:');
+		appendSearchDataFrame(df, ws.botMessage, params.query);
+	}
+
+	if (last_content) {
+		ws.close();
+	}
+}
+
+/* #################################################### */
+
+function handleStreamAnswerMessage(event, ws, params) {
+	/* Stop loader on first message */
+	Swal.close();
+
+	/* Scroll chat area top to make strem visble continuously */
+	ws.chatArea.scrollTop = ws.chatArea.scrollHeight;
+
+	const data = JSON.parse(event.data);
+	const { content, citation, context, last_context, error, df } = data;
+
+	if (error) {
+		console.error(error);
+		Swal.fire({
+			icon: 'error',
+			title: "Error in chat completion",
+			text: error,
+			allowOutsideClick: false
+		});
+		ws.close();
+	}
+
+	let formattedMessage = "";
+
+	if (citation) {
+		formattedMessage = "<br><br><b>Citation:</b><br>" + citation;
+		ws.botMessage.innerHTML += formattedMessage;
+	}
+
+	/* Working */
+	if (context) {
+		formattedMessage = "<br><br><b>Context:</b><br>" + context;
+		ws.botMessage.innerHTML += formattedMessage;
+
+		if (params.answer_per_paper === 'True') {
+			formattedMessage = "<br><b>Answer:</b><br>";
+			ws.botMessage.innerHTML += formattedMessage;
+		} else if (params.rerank == 'False') {
+			ws.close();
+		}
+	}
+
+	if (last_context) {
+		formattedMessage = "<br><br><b>Context:</b><br>" + last_context;
+		ws.botMessage.innerHTML += formattedMessage;
+
+		if (params.rerank == 'False') {
+			ws.close();
+		}
+	}
+
+	if (content) {
+		ws.botMessage.innerHTML += content;
+	}
+
+	if (df) {
+		appendDataFrame(df);
+		ws.close();
+	}
+}
+/* #################################################### */
+
+function openWebSocket(end_point, params, setupElements, messageHandler) {
+	ws = new WebSocket(wsUrl + end_point);
+
+	ws.onopen = () => {
+		console.log("WebSocket connection opened.");
+
+		// Send params only when WebSocket connection is open
+		ws.send(JSON.stringify(params));
+		console.log('Params sent to WebSocket: ', JSON.stringify(params));
+
+		setupElements(ws, params);
+	};
+
+	ws.onmessage = (event) => {
+		messageHandler(event, ws, params);
+	};
+
+	ws.onclose = () => {
+		console.log("WebSocket connection closed.");
+	};
+
+	ws.onerror = (error) => {
+		console.error("WebSocket error:", error);
+		ws.close();
+	};
+}
+
+function serverError(error_message) {
+	Swal.fire({
+		icon: 'error',
+		title: 'Server Error',
+		text: `Could not communicate with the server. ${error_message}`,
+		customClass: {
+			container: 'my-swal'
+		},
+	});
+}
+
+function createMessageContainerElements(id_div) {
+	let chatArea = document.getElementById(id_div);
+	let messageContainer = document.getElementById(`${id_div}-message-container`);
 	if (!messageContainer) {
 		messageContainer = document.createElement('div');
-		messageContainer.id = 'message-container';
+		messageContainer.id = `${id_div}-message-container`;
 		chatArea.insertBefore(messageContainer, chatArea.firstChild);
 	}
 	return { chatArea, messageContainer };
 }
-
 
 function createUserMessageElements() {
 	let userMessageContainer = document.createElement('div');
@@ -39,7 +477,6 @@ function createUserMessageElements() {
 
 	return { userMessageContainer, userIcon, userMessage };
 }
-
 
 function createBotMessageElements() {
 	let botMessageContainer = document.createElement('div');
@@ -56,132 +493,13 @@ function createBotMessageElements() {
 }
 
 
-async function sendVectorIds(vectorIds,
-	namespace,
-	template,
-	userInput) {
-	// let inputField = document.getElementById('user-input');
-	// let userInput = inputField.value;
-	console.log("namespace = " + namespace + " inside sendVectorIds()");
-	var llm = document.getElementById('select_llm').value;
-	var temp = parseFloat(document.getElementById('set_temp').value);
-	var paper_id = document.getElementById('set_paper_id').value;
-	console.log("paper_id = " + paper_id + " inside sendVectorIds()");
-	var answer_per_paper = document.getElementById('select_answer_per_paper').value;
-	var chunks_from_one_paper = document.getElementById('select_chunks_from_one_paper').value;
-	var py_script_path = 'pycodes/get_answer_rerank.py';
-	let isError = false;
-
-	/* Here you should process the user input and generate a response */
-	console.log("Calling runPythonScript API from sendVectorIds() " + ++rerank_count + " times!");
-	const response = await fetch('/api/runPythonScript', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			py_script_path: py_script_path,
-			vector_ids: vectorIds,
-			llm: llm,
-			temp: temp,
-			namespace: namespace,
-			query: userInput,
-			template: template,
-			paper_id: paper_id,
-			answer_per_paper: answer_per_paper,
-			chunks_from_one_paper: chunks_from_one_paper
-		}),
-	});
-	let result = await response.json();
-	/* 	result is an object with a single property 'result' which is a JSON string
-	You need to parse that JSON string to get the actual result object: */
-	console.log("Printing result below:");
-	console.log(result);
-	result = JSON.parse(result.result);
-	console.log("Printing result.code below:");
-	console.log(result.code);
-	if (result.code == "error" || result.code == "failure") {
-		Swal.fire({
-			icon: 'error',
-			title: "Error in chat completion",
-			text: result.output,
-			allowOutsideClick: false
-		});
-		isError = true;
-	} else {
-		// Hide datatable modal after backend python code has returned result
-		$('#dataModal').hide();
-
-		/* display user message on console */
-		await displayChatResponse(result, userInput);
-
-		// Clear the input field
-		let inputField = document.getElementById('user-input');
-		inputField.value = '';
-	}
-	return isError;
-}
-
-
-function displayChatResponse(result, userInput) {
-	let { chatArea, messageContainer } = createMessageContainerElements();
-	let { userMessageContainer, userIcon, userMessage } = createUserMessageElements();
-	let { botMessageContainer, botIcon, botMessage } = createBotMessageElements();
-	userMessage.textContent = userInput;
-	userMessageContainer.appendChild(userMessage);
-	messageContainer.appendChild(userMessageContainer);
-
-	//display bot's response			
-	if (result.output[0].hasOwnProperty('context') &&
-		result.output[0].hasOwnProperty('answer') &&
-		result.output[0].hasOwnProperty('reference')) {
-
-		let formattedMessage = "";
-		// Create bot response for each output item
-		for (let item of result.output) {
-			// Add answer
-			formattedMessage += "<b>Answer:</b><br>" + item.answer + "<br><br>";
-
-			// Add references
-			if (Array.isArray(item.reference)) {
-				console.log("Reference is an Array");
-				formattedMessage += "<b>References:</b><br>";
-				for (let i = 0; i < item.reference.length; i++) {
-					formattedMessage += (i + 1) + ". " + item.reference[i] + "<br><br>";
-				}
-			} else {
-				console.log("Reference is NOT an Array");
-				formattedMessage += "<b>Reference:</b><br>" + item.reference + "<br><br>";
-			}
-
-			// Add context
-			formattedMessage += "<b>Context:</b><br>" + item.context + "<br><br>";
-			formattedMessage += "********************<br>"
-			// console.log(formattedMessage);
-			console.log(item.context);
-		}
-		botMessage.innerHTML = formattedMessage;
-		botMessageContainer.appendChild(botMessage);
-		messageContainer.appendChild(botMessageContainer);
-		// console.log(formattedMessage);
-	} else {
-		console.log("Atleast one of output.context/output.answer/output.reference is NOT a property");
-	}
-}
-
-
 // New function to handle login
 async function handleLogin(e) {
 	e.preventDefault();
 
 	const username = document.getElementById('username').value;
-	// console.log ("username = " + username);
 	const password = document.getElementById('password').value;
-	// console.log ("password = " + password);
 
-	let py_script_path = 'pycodes/validate_user.py';
-	let isError = true;
-	
 	// Validate username and password
 	if (!username || !password) {
 		Swal.fire({
@@ -192,42 +510,31 @@ async function handleLogin(e) {
 				container: 'my-swal'
 			},
 		});
-		return true;
+		return true; // Keep the Swal open
 	}
 
 	// You can send this data to your server for authentication
 	try {
-		const response = await fetch('/api/runPythonScript', {
+		const response = await fetch('/api/validate_user/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({
-				py_script_path: py_script_path,
-				username: username,
-				password: password
-			}),
+			body: JSON.stringify({ username, password }),
 		});
 
-		let result = await response.json();
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
 
-		/* 	result is an object with a single property 'result' which is a JSON string
-		You need to parse that JSON string to get the actual result object: */
+		// Now the response is already a JSON object, so no need for JSON.parse
+		const result = await response.json();
+
 		console.log("Printing result below:");
 		console.log(result);
-		result = JSON.parse(result.result);
-		if (result.code == "error" || result.code == "failure") {
-			Swal.fire({
-				icon: 'error',
-				title: 'Authentication Failed',
-				text: result.message,
-				customClass: {
-					container: 'my-swal'
-				},
-				allowOutsideClick: false
-			});
-			isError = true;
-		} else if (result.code == "success") {
+
+		// Handle the response based on the result
+		if (result.code === "success") {
 			Swal.fire({
 				icon: 'success',
 				title: 'Successfully logged in!',
@@ -238,18 +545,21 @@ async function handleLogin(e) {
 			});
 			// If authentication is successful
 			$('#loginModal').hide();
+		} else {
+			Swal.fire({
+				icon: 'error',
+				title: 'Authentication Failed',
+				text: result.message,
+				customClass: {
+					container: 'my-swal'
+				},
+				allowOutsideClick: false
+			});
 		}
 	} catch (error) {
-		Swal.fire({
-			icon: 'error',
-			title: 'Server Error',
-			text: 'Could not communicate with the server' + error,
-			customClass: {
-				container: 'my-swal'
-			},
-		});
+		serverError(error.message);
 	}
-	return true; // Return true to prevent showLoader from closing the Swal modal
+	return true; // Keep the Swal open in case of an error
 }
 /* ----##### USER DEFINED FUNCTIONS END #####---- */
 
@@ -309,7 +619,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	// Hide all tab content initially
-	$('#chat_panel').hide();
+	// $('#chat_panel').hide();
+	$('#search_panel').hide();
 	$('#pdf_panel').hide();
 
 	// Event listener for tab click
@@ -321,6 +632,7 @@ $(document).ready(function () {
 
 		// Hide all panel contents
 		$('#chat_panel').hide();
+		$('#search_panel').hide();
 		$('#pdf_panel').hide();
 
 		// Show the targeted panel content
@@ -349,7 +661,7 @@ $(document).ready(function () {
 	// console.log("fluidContainerHeight = " + fluidContainerHeight);
 	// Apply this height to #fluid_container1
 	$("#fluid_container1").css("height", fluidContainerHeight);
-
+	$("#fluid_container2").css("height", fluidContainerHeight);
 	// Calculate the appropriate height for #viewerContainer
 	var tabPanelsHeight = $("#tab_panels").outerHeight();
 	var pdfPanelsHeight = $("#pdf_panel").outerHeight();
@@ -391,6 +703,13 @@ tippy('#tooltip_select_namespace', {
 	waste tokens/money unnecessarily.',
 	theme: 'my-tippy-theme'
 });
+
+// tippy('#tooltip_review_mode', {
+// 	content: 'Search PubMed for relevant hits. \
+// 	Set this to `True` when you want to find article relevant to you keyword or query. \
+// 	Use `Search` panel to type your keyword when using this feature.',
+// 	theme: 'my-tippy-theme'
+// });
 
 tippy('#tooltip_search_namespace', {
 	content: 'Enter a valid PubMed ID to be searched in the selected namespace.',
@@ -551,64 +870,176 @@ const endPicker = flatpickr(endInput, {
 /* Search namespace */
 var button_search_namespace = document.getElementById('button_search_namespace');
 button_search_namespace.addEventListener('click', async () => {
-	var namespace = document.getElementById('select_namespace').value;
+	const namespace = document.getElementById('select_namespace').value;
 	const pmid = document.getElementById('search_namespace').value;
-	var py_script_path = 'pycodes/get_pmid_info.py';  // specify python script path here
+	console.log("Selected namespace = " + namespace);
+	console.log("Entered PMID = " + pmid);
+
+	const params = {
+		namespace: namespace,
+		pmid: pmid
+	}
 
 	// Show intermediate progress bar
 	document.getElementById('progress-container').classList.remove('hidden');
+	const end_point = "/search_PMID_in_namespace";
+	ws = new WebSocket(wsUrl + end_point);
 
-	const response = await fetch('/api/runPythonScript', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			py_script_path: py_script_path,
-			namespace: namespace,
-			pmid: pmid
-		}),
-	});
-	let result = await response.json();
-	/* 	result is an object with a single property 'result' which is a JSON string
-		You need to parse that JSON string to get the actual result object: */
-	// console.log("Printing result below:");
-	console.log(result);
-	result = JSON.parse(result.result);
+	ws.onopen = () => {
+		console.log("WebSocket connection opened.");
+		ws.send(JSON.stringify(params));
+	};
 
-	// Hide progress bar when task completes
-	document.getElementById('progress-container').classList.add('hidden');
+	ws.onmessage = (event) => {
+		console.log('event.data = ', event.data);
+		const result = JSON.parse(event.data);
+		document.getElementById('progress-container').classList.add('hidden');
 
-	if (result.code == "failure") {
-		Swal.fire({
-			icon: 'error',
-			title: "Namespace search failed",
-			html: result.output,
-			allowOutsideClick: false
-		});
-	} else {
-		Swal.fire({
-			icon: 'info',
-			title: "Namespace search succeeded",
-			// html: result.output,
-			html: "<div class='align-left'>" + result.output + "</div>", 
-			allowOutsideClick: false
-		});
-	}
+		// Handle the response based on the result
+		if (result.code === "failure") {
+			console.error(result.code);
+			Swal.fire({
+				icon: 'error',
+				title: 'Namespace search failed',
+				html: result.msg,
+				customClass: {
+					container: 'my-swal'
+				},
+				allowOutsideClick: false
+			});
+			return;
+		}
 
+		if (result.code === "not found") {
+			console.error(result.code);
+			Swal.fire({
+				icon: 'warning',
+				title: 'PMID not found',
+				html: result.msg,
+				customClass: {
+					container: 'my-swal'
+				},
+				allowOutsideClick: false
+			});
+			return;
+		}
+
+		if (result.code === "success") {
+			console.error(result.code);
+			Swal.fire({
+				icon: 'success',
+				title: 'Search succeeded',
+				html: result.msg,
+				customClass: {
+					container: 'my-swal'
+				},
+				allowOutsideClick: false
+			});
+			return;
+		}
+	};
+
+	ws.onerror = (error) => {
+		console.error("WebSocket error:", error);
+		ws.close();
+	};
+
+	ws.onclose = () => {
+		console.log("WebSocket connection closed.");
+	};
 });
 
 
-/* PMC article downloader params */
+/* PMC article downloader params (WebSocket version) */
 var button_fetch_articles = document.getElementById('button_fetch_articles');
 button_fetch_articles.addEventListener('click', async () => {
-	Swal.fire({
-		icon: 'info',
-		//title: "In this version namespace generation is disabled",
-	        title: "Namespace generation is disabled in this version due to resource limitations on the Pinecone server under the free 'Starter' plan. To enable this feature, please set up the app locally by following the documentation titled 'Running WeiseEule as localhost app' in the supplement.",
-		allowOutsideClick: false
-	});
+	const embedd_model = document.getElementById('select_embedd_model').value;
+	const keywords = document.getElementById('keywords').value;
+	const start_date = document.getElementById('start-date').value;
+	const end_date = document.getElementById('end-date').value;
 
+	const params = {
+		embedd_model: embedd_model,
+		keywords: keywords,
+		start_date: start_date,
+		end_date: end_date
+	}
+
+	if (keywords != "" & start_date != "" & end_date != "") {
+		// Show intermediate progress bar
+		document.getElementById('progress-container2').classList.remove('hidden');
+		const end_point = "/fetch_articles";
+		ws = new WebSocket(wsUrl + end_point);
+
+		ws.onopen = () => {
+			console.log("WebSocket connection opened.");
+			ws.send(JSON.stringify(params));
+		};
+
+		ws.onmessage = (event) => {
+			console.log('event.data = ', event.data);
+			const result = JSON.parse(event.data);
+			document.getElementById('progress-container2').classList.add('hidden');
+
+			// Handle the response based on the result
+			if (result.code === "exit") {
+				console.warn(result.code);
+				Swal.fire({
+					icon: 'warning',
+					title: 'Article fetch exited',
+					html: result.message,
+					customClass: {
+						container: 'my-swal'
+					},
+					allowOutsideClick: false
+				});
+				return;
+			} else if (result.code === "failure") {
+				console.error(result.code);
+				Swal.fire({
+					icon: 'error',
+					title: 'Article fetch failed',
+					html: result.message,
+					customClass: {
+						container: 'my-swal'
+					},
+					allowOutsideClick: false
+				});
+				return;
+			} else if (result.code === "success") {
+				console.log(result.code);
+				Swal.fire({
+					icon: 'success',
+					title: 'Articles fetched',
+					html: result.message,
+					customClass: {
+						container: 'my-swal'
+					},
+					allowOutsideClick: false
+				});
+				return;
+			}
+		};
+
+		ws.onerror = (error) => {
+			console.error("WebSocket error:", error);
+			ws.close();
+		};
+
+		ws.onclose = () => {
+			console.log("WebSocket connection closed.");
+		};
+	}
+
+
+	// Swal.fire({
+	// 	icon: 'info',
+	// 	// title: "In this version namespace generation is disabled",
+	// 	title: "Namespace generation is disabled in this version due to resource limitations on the Pinecone server under the free 'Starter' plan. To enable this feature, please set up the app locally by following the instructions in the supplementary file (Additional file 2).",
+	// 	allowOutsideClick: false
+	// });
+
+	/*------------ DO NOT DELETE ------------*/
 	// const embedd_model = document.getElementById('select_embedd_model').value;
 	// const keywords = document.getElementById('keywords').value;
 	// const start_date = document.getElementById('start-date').value;
@@ -665,6 +1096,7 @@ button_fetch_articles.addEventListener('click', async () => {
 	// 		allowOutsideClick: false
 	// 	});
 	// }
+	/*------------ DO NOT DELETE ------------*/
 });
 
 /* ----##### Main window chatbox #####---- */
@@ -698,11 +1130,12 @@ async function showLoader(asyncFunctionToRun, title = "Getting the answer, wait 
 	});
 
 	let error = await asyncFunctionToRun(...params);
-	if (!error) {
-		Swal.close();
-	}
+	// if (!error) {
+	// 	Swal.close();
+	// }
 }
 
+/* Call helper function for chat */
 document.getElementById('send-button').addEventListener('click', async function (event) {
 	console.log("Calling showLoader(sendInput) from addEventListener('click')");
 	showLoader(sendInput); // sendInput is an async function defined later
@@ -716,22 +1149,55 @@ document.getElementById('user-input').addEventListener('keydown', async function
 	}
 });
 
-async function sendInput() {
-	// var llm = document.getElementById('select_llm').value;
-	// const temp = parseFloat(document.getElementById('set_temp').value);
-	// const namespace = document.getElementById('select_namespace').value;
-	// const template = document.getElementById('template').value;
-	// const top_k = document.getElementById('set_top_k').value;
-	// const embedd_model = document.getElementById('select_embedd_model').value;
-	// const paper_id = document.getElementById('set_paper_id').value;
-	// // const search_keywords = document.getElementById('search_keywords').value.toLowerCase();
-	// // const primary_keywords = document.getElementById('primary_keywords').value.toLowerCase();
-	// const fix_keyword = document.getElementById('select_fix_keyword').value;
-	// const answer_per_paper = document.getElementById('select_answer_per_paper').value;
-	// const chunks_from_one_paper = document.getElementById('select_chunks_from_one_paper').value;
-	// const rerank = document.getElementById('select_rerank').value;
-	// const advanced_use = document.getElementById('select_rows_table').value;
+/* Call helper function for PubMed search */
+document.getElementById('search-pubmed-button').addEventListener('click', async function (event) {
+	console.log("Calling showLoader(sendInputSearch) from addEventListener('click')");
+	showLoader(sendInputSearch); // sendInputSearch is an async function defined later
+});
 
+document.getElementById('search-input').addEventListener('keydown', async function (event) {
+	if (event.key === 'Enter') {
+		event.preventDefault();
+		console.log("Calling showLoader(sendInputSearch) from addEventListener('keydown')");
+		showLoader(sendInputSearch); // sendInputSearch is an async function defined later
+	}
+});
+
+
+async function sendInputSearch() {
+	// var search_pubmed = document.getElementById('review_mode').value;
+	let isError = false;
+
+	/* Extract the query and clear input field */
+	let inputField = document.getElementById('search-input');
+	let userInput = inputField.value;
+	inputField.value = '';
+
+	/* Here you should process the user input and generate a response */
+	console.log("Calling fastAPI get_answer endpoint from sendInputSearch() " + ++count + " times!");
+	var query = userInput.toLowerCase();
+	try {
+		const end_point = "/search_pubmed"
+		const params = {
+			// search_pubmed: search_pubmed,
+			query: query
+		};
+		// console.log('Before openWebSocket()');
+		console.log('Before calling openWebSocket() params.query = ' + params.query);
+		// openWebSocket(end_point, params);
+		// openWebSocket(end_point, params, handleSearchPubmedMessage);
+		openWebSocket(end_point, params, setupSearchElements, handleSearchPubmedMessage);
+		console.log('After openWebSocket()');
+	} catch (error) {
+		// // Clear the input field
+		// inputField.value = '';
+		serverError(error.message);
+	}//try end 
+	return isError;
+}
+
+
+async function sendInput() {
 	var llm = document.getElementById('select_llm').value;
 	var temp = parseFloat(document.getElementById('set_temp').value);
 	var namespace = document.getElementById('select_namespace').value;
@@ -739,42 +1205,34 @@ async function sendInput() {
 	var top_k = document.getElementById('set_top_k').value;
 	var embedd_model = document.getElementById('select_embedd_model').value;
 	var paper_id = document.getElementById('set_paper_id').value;
-	// var search_keywords = document.getElementById('search_keywords').value.toLowerCase();
-	// var primary_keywords = document.getElementById('primary_keywords').value.toLowerCase();
 	var fix_keyword = document.getElementById('select_fix_keyword').value;
 	var answer_per_paper = document.getElementById('select_answer_per_paper').value;
 	var chunks_from_one_paper = document.getElementById('select_chunks_from_one_paper').value;
 	var rerank = document.getElementById('select_rerank').value;
 	var advanced_use = document.getElementById('select_rows_table').value;
 	console.log("advanced_use = " + advanced_use);
-
-
-	var py_script_path = 'pycodes/get_answer.py';
 	let isError = false;
 
 	if (temp < 0 || temp > 2) {
 		console.log("sendInput() should return now");
 		// return { icon: 'error', title: 'Invalid params', text: 'temperature parameter must be between 0 and 2' };
 	} else {
+		/* Extract the query and clear input field */
 		let inputField = document.getElementById('user-input');
 		let userInput = inputField.value;
+		inputField.value = '';
 
 		/* Here you should process the user input and generate a response */
-		console.log("Calling runPythonScript API from sendInput() " + ++count + " times!");
-		const response = await fetch('/api/runPythonScript', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				py_script_path: py_script_path,
+		console.log("Calling fastAPI get_answer endpoint from sendInput() " + ++count + " times!");
+		var query = userInput.toLowerCase();
+		try {
+			const end_point = "/stream_answer"
+			const params = {
 				llm: llm,
 				temp: temp,
 				namespace: namespace,
-				query: userInput.toLowerCase(),
+				query: query,
 				template: template,
-				// search_keywords: search_keywords,
-				// primary_keywords: primary_keywords,
 				embedd_model: embedd_model,
 				paper_id: paper_id,
 				answer_per_paper: answer_per_paper,
@@ -782,145 +1240,18 @@ async function sendInput() {
 				fix_keyword: fix_keyword,
 				rerank: rerank,
 				top_k: top_k
-			}),
-		});
-		let result = await response.json();
-
-		/* 	result is an object with a single property 'result' which is a JSON string
-		You need to parse that JSON string to get the actual result object: */
-		// console.log("Printing result below:");
-		console.log(result);
-		result = JSON.parse(result.result);
-		// console.log("Printing result.code below:");
-		// console.log(result.code);
-		if (result.code == "error" || result.code == "failure") {
-			Swal.fire({
-				icon: 'error',
-				title: "Error in chat completion",
-				text: result.output,
-				allowOutsideClick: false
-			});
-			isError = true;
-		} else if (result.code == "success" && rerank === 'True') {
-			/* write logic to display the df as datatable */
-			//show datatable modal
-			var modal = document.getElementById("dataModal");
-			// var span = document.getElementsByClassName("close")[0];
-			var span = document.getElementById("dataModal-close");
-			span.onclick = function () {
-				modal.style.display = "none";
-				$('#dataTable').off('click', 'tbody tr');  // Optionally, you may try unbinding the click event here
-			}
-
-			/* Check and Destroy Previous DataTable Instances */
-			if ($.fn.DataTable.isDataTable('#dataTable')) {
-				$('#dataTable').DataTable().destroy();
-				$('#dataTable tbody').empty();
-				$('#dataTableHeaders').empty(); // Clear the previously injected headers
-			}
-
-			// Get keys from the first item of result.output
-			var keys = Object.keys(result.output[0]);
-
-			// Create an array of column definitions using the keys
-			var columnsDef = keys.map(key => {
-				return { data: key };
-			});
-
-			// Dynamically generate table headers and append to the table
-			keys.forEach(key => {
-				$('#dataTableHeaders').append('<th>' + key.replace(/_/g, ' ').charAt(0).toUpperCase() + key.slice(1) + '</th>');
-			});
-
-			var table = $('#dataTable').DataTable({
-				data: result.output,
-				columns: columnsDef,
-				order: [],
-				responsive: true
-			});
-
-			/* Show the table upon successful python execution */
-			$('#dataModal').show();
-
-			// $('#dataTable tbody tr').off('click').on('click', function () {
-			// 	let select_rows_setting = $('#select_rows_table').val();
-			// 	if (select_rows_setting === 'True') {
-			// 		console.log('Row clicked!');
-			// 		$(this).toggleClass('selected');
-			// 	} else {
-			// 		console.log('select_rows_setting = ' + select_rows_setting);
-			// 	}
-			// });
-
-			$('#dataTable tbody').off('click').on('click', 'tr', function () {
-				let select_rows_setting = $('#select_rows_table').val();
-				if (select_rows_setting === 'True') {
-					console.log('Row clicked!');
-					$(this).toggleClass('selected');
-				} else {
-					console.log('select_rows_setting = ' + select_rows_setting);
-				}
-			});
-
-			$('#getIndicesBtn').off('click').on('click', function () {
-				var selectedRows = table.rows('.selected').data();
-				llm = document.getElementById('select_llm').value;
-
-				if (selectedRows.length === 0) {
-					// console.log('No rows selected!');
-					// return;
-					/* Default case for normal user */
-					// const defaultSelectCount = llm == 'gpt-3.5-turbo' ? 5 : (llm == 'gpt-4' ? 10 : 0);
-					const defaultSelectCount = (() => {
-						switch (llm) {
-							case 'gpt-3.5-turbo':
-								return 5;
-							case 'gpt-3.5-turbo-1106':
-								return 10;
-							case 'gpt-4-1106-preview':
-								return 10;
-							case 'gpt-4':
-								return 8;
-							// Add more cases as needed
-							default:
-								return 5;
-						}
-					})();
-					console.log("llm = " + llm);
-					console.log("defaultSelectCount = " + defaultSelectCount);
-
-					// Function to extract 'vector_id' from the first N rows, where N = defaultSelectCount
-					var getDefaultVectorIds = () => {
-						return result.output.slice(0, defaultSelectCount).map(row => row['vector_id']);
-					};
-					var vectorIds = getDefaultVectorIds();
-					console.log("Selected vector ids: ", vectorIds);
-				} else {
-					console.log("Selected Indices: ", table.rows('.selected').indexes().toArray());
-					var vectorIds = [];
-					$.each(selectedRows, function (index, value) {
-						vectorIds.push(value['vector_id']);
-					});
-					console.log("Selected vector ids: ", vectorIds);
-				}
-
-				console.log("Calling showLoader(sendVectorIds) from $('#getIndicesBtn').click");
-				/* Call an asynchronous function and pass vectorIds */
-				showLoader(sendVectorIds,
-					"Getting the answer, wait ...",
-					vectorIds,
-					namespace,
-					template,
-					userInput);
-			});
-		}
-		else {
-			/* display user message on console */
-			await displayChatResponse(result, userInput);
-		}
-
-		// Clear the input field
-		inputField.value = '';
+			};
+			// console.log('Before openWebSocket()');
+			console.log('Before calling openWebSocket() params.query = ' + params.query);
+			// openWebSocket(end_point, params);
+			// openWebSocket(end_point, params, handleStreamAnswerMessage);
+			openWebSocket(end_point, params, setupChatElements, handleStreamAnswerMessage);
+			console.log('After openWebSocket()');
+		} catch (error) {
+			// // Clear the input field
+			// inputField.value = '';
+			serverError(error.message);
+		}//try end 
 	}
 	return isError;
 }
@@ -940,7 +1271,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		textLayerMode: 2,
 	});
 
-
+	/* DO Not Delete */
 	// document.getElementById('file-input').addEventListener('change', function (event) {
 	// 	let file = event.target.files[0];
 	// 	if (file.type !== 'application/pdf') {
@@ -961,14 +1292,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	};
 	// 	fileReader.readAsArrayBuffer(file);
 	// });
+	/* DO Not Delete */
 
 	// Temporarily blocking the file upload
 	document.getElementById('file-upload-label').addEventListener('click', function (e) {
 		e.preventDefault();  // Prevent the default behavior of the label
 		Swal.fire({
 			icon: 'info',
-			//title: "In this version pdf upload is disabled",
-		        title: "PDF upload is disabled in this version due to limited resources on the cloud server hosting the app. To enable this feature, please set up the app locally by following the documentation titled 'Running WeiseEule as localhost app' in the supplement.",
+			// title: "In this version pdf upload is disabled",
+			title: "PDF upload is disabled in this version due to limited resources on the cloud server hosting the app. To enable this feature, please set up the app locally by following the instructions in the supplementary file (Additional file 2).",
 			allowOutsideClick: false
 		});
 	});
