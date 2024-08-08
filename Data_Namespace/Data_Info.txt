@@ -1,0 +1,1 @@
+This Excel file contains the data for the five namespaces used in our study, as detailed in the manuscript under "Table 4: Article Distribution within Namespaces." The papers from the query topics are highlighted using the color scheme introduced in "Table 2: Queries from Various Biomedical Topics Used to Evaluate PES1 and PES2."
