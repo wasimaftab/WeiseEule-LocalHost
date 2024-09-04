@@ -1,0 +1,41 @@
+2024-09-04 17:17:03 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-09-04 17:17:03 - weiseeule_logger - INFO - Received params: {'query': 'cerebral disease'}
+2024-09-04 17:17:03 - weiseeule_logger - INFO - Parsed params: query='cerebral disease'
+2024-09-04 17:17:03 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-09-04 17:17:03 - weiseeule_logger - INFO - query does not contain #
+2024-09-04 17:17:03 - weiseeule_logger - INFO - WebSocket disconnected
+2024-09-04 17:17:14 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-09-04 17:17:14 - weiseeule_logger - INFO - Received params: {'query': 'cerebral disease #34'}
+2024-09-04 17:17:14 - weiseeule_logger - INFO - Parsed params: query='cerebral disease #34'
+2024-09-04 17:17:14 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-09-04 17:17:14 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-09-04 17:17:14 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and MedCPT_folder: MedCPT_Embeddings
+2024-09-04 17:17:14 - weiseeule_logger - INFO - WebSocket disconnected
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Received params: {'query': 'cerebral disease #34'}
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Parsed params: query='cerebral disease #34'
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and MedCPT_folder: MedCPT_Embeddings
+2024-09-04 17:18:33 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and All the required files are found
+2024-09-04 17:18:35 - weiseeule_logger - INFO - WebSocket disconnected
+2024-09-04 17:18:42 - weiseeule_logger - INFO - Insdie summarize_abstracts and received params: {'llm': 'gpt-4o', 'pmids': '34000009,34000004', 'query': 'cerebral disease #34'}
+2024-09-04 17:18:42 - weiseeule_logger - INFO - Parsed params: llm='gpt-4o' pmids='34000009,34000004' query='cerebral disease #34'
+2024-09-04 17:18:42 - weiseeule_logger - INFO - type(pmids) = <class 'list'>
+2024-09-04 17:18:42 - weiseeule_logger - INFO - Inside process_pmids_and_summarize(...)
+2024-09-04 17:18:42 - weiseeule_logger - INFO - type(pmids) = <class 'list'>
+2024-09-04 17:18:42 - weiseeule_logger - INFO - pmids = ['34000009', '34000004']
+2024-09-04 17:18:42 - weiseeule_logger - INFO - llm = gpt-4o
+2024-09-04 17:18:42 - weiseeule_logger - INFO - query = cerebral disease #34
+2024-09-04 17:18:42 - weiseeule_logger - INFO - After removing chunk number query = cerebral disease
+2024-09-04 17:18:44 - weiseeule_logger - INFO - WebSocket disconnected
+2024-09-04 17:19:57 - weiseeule_logger - INFO - Inside websocket_endpoint()
+2024-09-04 17:19:57 - weiseeule_logger - INFO - Inside while True:
+2024-09-04 17:19:57 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-09-04 17:19:57 - weiseeule_logger - INFO - Received params: {'llm': 'gpt-3.5-turbo-1106', 'temp': 0, 'namespace': 'Dosage_compensation_MedCPT', 'query': "what's dosage compensation?", 'template': '', 'embedd_model': 'MedCPT', 'paper_id': '-1', 'answer_per_paper': 'False', 'chunks_from_one_paper': 'False', 'fix_keyword': 'True', 'rerank': 'False', 'top_k': '10'}
+2024-09-04 17:19:57 - weiseeule_logger - INFO - Parsed params: llm='gpt-3.5-turbo-1106' temp=0.0 namespace='Dosage_compensation_MedCPT' query="what's dosage compensation?" template='' embedd_model='MedCPT' paper_id='-1' answer_per_paper='False' chunks_from_one_paper='False' fix_keyword='True' rerank='False' top_k='10'
+2024-09-04 17:19:57 - weiseeule_logger - INFO - Inside fastAPI app, before calling qa.scientific_qa_bot_GUI_stream() query = what's dosage compensation?
+2024-09-04 17:19:58 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = query and max_length = 64
+2024-09-04 17:20:02 - weiseeule_logger - INFO - Inside while True:
+2024-09-04 17:20:02 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-09-04 17:20:02 - weiseeule_logger - INFO - WebSocket disconnected
