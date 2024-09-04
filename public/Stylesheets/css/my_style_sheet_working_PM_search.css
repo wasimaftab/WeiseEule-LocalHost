@@ -62,6 +62,38 @@ table#dataTable {
 }
 /* END Modal style for datatable */
 
+/* BEGIN: Styling PubMed search data table */
+#search-area #dataTableSearch {
+  width: 50% !important; /* Ensure table takes the full width */
+  border-collapse: collapse !important; /* Remove space between table cells */
+}
+
+#dataTableSearch th {
+  background-color: #7491c4; /* Header background color */
+  color: black; /* Header text color */
+}
+
+#dataTableSearch tbody tr:nth-child(odd) {
+  background-color: #c2b4d2; /* Odd row background color */
+}
+
+#dataTableSearch tbody tr:nth-child(even) {
+  background-color: rgb(222, 206, 235); /* Even row background color */
+}
+
+#dataTableSearch tbody tr:hover {
+  background-color: #9bbffc; /* Row hover color */
+}
+
+/* Add padding and border to table cells */
+#dataTableSearch th, #dataTableSearch td {
+  padding: 8px;
+  border: 1px solid #005eff;
+  text-align: left;
+}
+/* END: Styling PubMed search data table */
+
+
 
 /* Modal style for login */
 #modal-content-login {
@@ -219,7 +251,7 @@ table#dataTable {
   border: black solid 2px !important;
 }
 
-#button-progress-container, #button-progress-container2 {
+#button-progress-container {
   display: flex;
   /* this will arrange the button and the progress bar side by side */
   align-items: center;
