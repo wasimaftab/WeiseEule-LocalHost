@@ -849,7 +849,7 @@ def pmc_text_downloader(keyword, start_date, end_date, max_papers, local_db_path
 ## Updated for pinecone-client version ≥ 3.0.0
 def get_pinecone_index():
     pc = Pinecone(api_key=os.environ['PINECONE_API_KEY'])  
-    index = pc.Index('namespaces-in-paper')
+    index = pc.Index(os.environ['PINECONE_INDEX'])
     return index
 ###############################################################################
 
