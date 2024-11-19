@@ -1,3 +1,8 @@
 node_modules
+
+# Ignore all .npy and .json files inside MedCPT_Embeddings
 MedCPT_Embeddings/*.npy
 MedCPT_Embeddings/*.json
+
+# Ensure the MedCPT_Embeddings directory is not ignored by including a placeholder
+!MedCPT_Embeddings/.gitkeep
