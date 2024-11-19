@@ -1,1 +1,3 @@
 node_modules
+MedCPT_Embeddings/*.npy
+MedCPT_Embeddings/*.json

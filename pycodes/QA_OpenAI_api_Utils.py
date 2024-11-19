@@ -1136,7 +1136,10 @@ async def search_PubMed(query):
     tokenizer = AutoTokenizer.from_pretrained("ncbi/MedCPT-Query-Encoder")
 
     queries = []
-    queries.append(query)
+    logger.info(f'Actual query is being searched is: {query.split("#")[0].strip()}')
+
+    queries.append(query.split("#")[0].strip()) # need to remove the chunk ID from query before embedding
+    # queries.append(query)
 
     with torch.no_grad():
         # tokenize the queries
