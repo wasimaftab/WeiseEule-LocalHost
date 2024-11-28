@@ -75,20 +75,57 @@ class GetAnswer(BaseModel):
 class SearchPubMed(BaseModel):
     query: str
 
+class SummazieTextPDF(BaseModel):
+    text: str
+    llm: str    
 ##------------------------------------------------------------------##
+
+# Endpoint for summarizing selected section from PDF
+@app.websocket("/ws/summarize_selected_text_PDF")
+async def websocket_search_PMID_in_namespace(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            try:
+                params = await websocket.receive_json()
+                params = SummazieTextPDF(**params)
+                logger.info("Inside summarize_selected_text_PDF endpoint()")
+                logger.info(f"params.text = {params.text}")
+                logger.info(f"params.llm = {params.llm}")
+
+                async for message in qa.summarize_selected_content(params.text, params.llm):
+                    await websocket.send_text(json.dumps(message))
+            except WebSocketDisconnect:
+                logger.info("WebSocket disconnected by the client.")
+                break  # Exit the loop if the WebSocket is disconnected
+            except Exception as e:
+                logger.error(f"Error during summarization: {e}")
+                await websocket.send_text(json.dumps({"error": str(e)}))
+                break
+    except Exception as e:
+        logger.error(f"Unexpected error in summarize abstracts WebSocket endpoint: {e}")
+    finally:
+        logger.info("Closing WebSocket connection.")
+##------------------------------------------------------------------##
+
 # Endpoint for searching a pmid inside namespace
 @app.websocket("/ws/search_PMID_in_namespace")
 async def websocket_search_PMID_in_namespace(websocket: WebSocket):
     await websocket.accept()
     try:
         while True:
-            params = await websocket.receive_json()
-            params = SearchNamespace(**params)
-            logger.info("Inside search_PMID_in_namespace endpoint()")
-            logger.info(f"params.namespace = {params.namespace}")
-            logger.info(f"params.pmid = {params.pmid}")
-            async for message in pmcd.check_article_contents(params.namespace, params.pmid):
-                await websocket.send_text(json.dumps(message))
+            try:
+                params = await websocket.receive_json()
+                params = SearchNamespace(**params)
+                logger.info("Inside search_PMID_in_namespace endpoint()")
+                logger.info(f"params.namespace = {params.namespace}")
+                logger.info(f"params.pmid = {params.pmid}")
+
+                async for message in pmcd.check_article_contents(params.namespace, params.pmid):
+                    await websocket.send_text(json.dumps(message))
+            except WebSocketDisconnect:
+                logger.info("WebSocket disconnected by the client.")
+                break  # Exit the loop if the WebSocket is disconnected
     except Exception as e:
             logger.error(f"Error in summarize abstracts WebSocket endpoint: {e}")
             await websocket.send_text(json.dumps({"error": str(e)}))
@@ -235,69 +272,73 @@ async def fetch_articles_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
         while True:
-            params = await websocket.receive_json()
-            params = fetchArticles(**params)
-            logger.info("Inside fetch_articles endpoint()")
-            logger.info(f"params = {params}")
-            
-            ## Get the arguments
-            start = time.time()
-            embedd_model = params.embedd_model
-            keywords = params.keywords # keyword which should appear in title/abstact
-            start_date = params.start_date
-            end_date = params.end_date
-
-            ## Check if the local database exists; if not, create it
-            # local_db_name = ('_'.join(keywords.split()) + "_local.db").lower()
-            namespace = ('_'.join(keywords.lower().split()) + '_' + embedd_model)
-            local_DB_dir = "Local_DB"
-            os.makedirs(local_DB_dir, exist_ok=True)
-            # local_db_path = "./" + local_DB_dir + "/" + local_db_name
-            local_db_path = './' + local_DB_dir + '/' + namespace + '.db'
-
-            if not os.path.isfile(local_db_path):
-                res = pmcd.create_tables(local_db_path)
-                if res["code"] == "failure":  
-                    await websocket.send_text(json.dumps({"code": "failure", "message": res["msg"]}))
-                else:
-                    ## Insert user into local DB
-                    users = [('testuser1', 'testpassword1'), ('testuser2', 'testpassword2')]
-                    pmcd.insert_users(local_db_path, users)
-
-            ## Download papers on the given keyword and date range and push it into local DB
-            res = pmcd.pmc_text_downloader(keyword=keywords,
-                                        start_date=start_date,
-                                        end_date=end_date,
-                                        max_papers=10000,
-                                        local_db_path=local_db_path,
-                                        user_id=1) # hardcoded user_id 1 for now
-            
-            if res["code"] == "exit":
-                await websocket.send_text(json.dumps({"code": "exit", "message": res["msg"]}))
-
-            # # temporary else
-            # else:
-            #     await websocket.send_text(json.dumps({"code": "success", "message": res["msg"]}))
-
-            else:
-                chunk_size = 2000
-                # namespace = "_".join(keywords.split()) + "_c" + str(chunk_size)
-                table_name = "Results"
-                res = pmcd.preprocess_data_qa(local_db_path, 
-                                        table_name, 
-                                        namespace,
-                                        embedd_model, 
-                                        chunk_size, 
-                                        data_dir="tmp")
+            try:
+                params = await websocket.receive_json()
+                params = fetchArticles(**params)
+                logger.info("Inside fetch_articles endpoint()")
+                logger.info(f"params = {params}")
                 
-                if res["code"] == "failure":
-                    await websocket.send_text(json.dumps({"code": "failure", "message": res["msg"]}))
+                ## Get the arguments
+                start = time.time()
+                embedd_model = params.embedd_model
+                keywords = params.keywords # keyword which should appear in title/abstact
+                start_date = params.start_date
+                end_date = params.end_date
+
+                ## Check if the local database exists; if not, create it
+                # local_db_name = ('_'.join(keywords.split()) + "_local.db").lower()
+                namespace = ('_'.join(keywords.lower().split()) + '_' + embedd_model)
+                local_DB_dir = "Local_DB"
+                os.makedirs(local_DB_dir, exist_ok=True)
+                # local_db_path = "./" + local_DB_dir + "/" + local_db_name
+                local_db_path = './' + local_DB_dir + '/' + namespace + '.db'
+
+                if not os.path.isfile(local_db_path):
+                    res = pmcd.create_tables(local_db_path)
+                    if res["code"] == "failure":  
+                        await websocket.send_text(json.dumps({"code": "failure", "message": res["msg"]}))
+                    else:
+                        ## Insert user into local DB
+                        users = [('testuser1', 'testpassword1'), ('testuser2', 'testpassword2')]
+                        pmcd.insert_users(local_db_path, users)
+
+                ## Download papers on the given keyword and date range and push it into local DB
+                res = pmcd.pmc_text_downloader(keyword=keywords,
+                                            start_date=start_date,
+                                            end_date=end_date,
+                                            max_papers=10000,
+                                            local_db_path=local_db_path,
+                                            user_id=1) # hardcoded user_id 1 for now
+                
+                if res["code"] == "exit":
+                    await websocket.send_text(json.dumps({"code": "exit", "message": res["msg"]}))
+
+                # # temporary else
+                # else:
+                #     await websocket.send_text(json.dumps({"code": "success", "message": res["msg"]}))
+
                 else:
-                    end = time.time()
-                    msg = "Time taken to fetch articles and insert into local DB"
-                    pmcd.log_elapsed_time(start, end, msg)
-                    await websocket.send_text(json.dumps({"code": "success", 
-                                                          "message": "Articles fetched, " + "Converted into vectors, " + res["msg"]}))
+                    chunk_size = 2000
+                    # namespace = "_".join(keywords.split()) + "_c" + str(chunk_size)
+                    table_name = "Results"
+                    res = pmcd.preprocess_data_qa(local_db_path, 
+                                            table_name, 
+                                            namespace,
+                                            embedd_model, 
+                                            chunk_size, 
+                                            data_dir="tmp")
+                    
+                    if res["code"] == "failure":
+                        await websocket.send_text(json.dumps({"code": "failure", "message": res["msg"]}))
+                    else:
+                        end = time.time()
+                        msg = "Time taken to fetch articles and insert into local DB"
+                        pmcd.log_elapsed_time(start, end, msg)
+                        await websocket.send_text(json.dumps({"code": "success", 
+                                                            "message": "Articles fetched, " + "Converted into vectors, " + res["msg"]}))
+            except WebSocketDisconnect:
+                logger.info("WebSocket disconnected")
+                break
     except Exception as e:
             logger.error(f"Error in fetch articles WebSocket endpoint: {e}")
             await websocket.send_text(json.dumps({"error": str(e)}))

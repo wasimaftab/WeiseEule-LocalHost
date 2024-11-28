@@ -6,3 +6,6 @@ MedCPT_Embeddings/*.json
 
 # Ensure the MedCPT_Embeddings directory is not ignored by including a placeholder
 !MedCPT_Embeddings/.gitkeep
+
+# Ignore all .db files inside Local_DB
+Local_DB/*.db

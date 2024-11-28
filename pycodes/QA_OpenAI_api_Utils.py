@@ -1241,6 +1241,35 @@ async def process_pmids_and_summarize(pmids:list, llm:str, query:str):
 
 ###############################################################################
 
+async def summarize_selected_content(text, llm):
+    # header = "Summarize the context provided below for a scientist. Do not include duplicate statements in the summary."
+    header = "Clearly explain the context provided below to a scientist. Do not include duplicate statements in the summary."
+
+    prompt = header + "\n\nContext:\n" + text
+
+
+    ## Call OpenAI API to get the summary
+    COMPLETIONS_API_PARAMS = {
+        "temperature": 1.0,
+        "max_tokens": 1200 if llm.startswith("gpt-4") else 800,
+        "model": llm,
+        "stream": True
+    }
+    try:
+        response = await client.chat.completions.create(messages=[{"role": "user", "content": prompt}],
+                                                **COMPLETIONS_API_PARAMS)
+        async for chunk in response:
+            if chunk.choices[0].finish_reason is None:
+                content = chunk.choices[0].delta.content
+                if content:
+                    yield {'summary': content}
+        yield {'end_summary' : 'Done!'}
+    except Exception as e:
+            error_message = f"Error running openai.ChatCompletion.create(...)! Actual exception is: {e}"
+            yield {"error": error_message}
+
+###############################################################################
+
 def get_embeddings(query, top_k, namespace):
     index = pmcd.get_pinecone_index()
     xq = client.embeddings.create(input=query, model=EMBEDDING_MODEL).data[0].embedding

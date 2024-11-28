@@ -18,7 +18,8 @@ from datetime import datetime
 from urllib.error import HTTPError
 from http.client import IncompleteRead
 # from lxml import etree
-from langchain.document_loaders import DirectoryLoader
+# from langchain.document_loaders import DirectoryLoader # old style  import
+from langchain_community.document_loaders import DirectoryLoader # New style  import
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from transformers import BertTokenizer, BertModel, AutoTokenizer, AutoModel
 from tqdm import tqdm
@@ -42,7 +43,6 @@ import torch
 import numpy as np
 import bcrypt
 import psutil
-import pickle
 import glob
 
 ## Set model for word embedding

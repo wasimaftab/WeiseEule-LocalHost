@@ -354,6 +354,21 @@ function handleSearchPubmedMessage(event, ws, params) {
 
 /* #################################################### */
 
+/* JavaScript function to toggle the context visibility */
+function toggleContext(contextId) {
+	const contextDiv = document.getElementById(contextId);
+	const toggleSymbol = contextDiv.previousElementSibling;
+
+	if (contextDiv.style.display === "none") {
+		contextDiv.style.display = "block";
+		toggleSymbol.textContent = "[-]";
+	} else {
+		contextDiv.style.display = "none";
+		toggleSymbol.textContent = "[+]";
+	}
+}
+
+
 function handleStreamAnswerMessage(event, ws, params) {
 	/* Stop loader on first message */
 	Swal.close();
@@ -373,6 +388,7 @@ function handleStreamAnswerMessage(event, ws, params) {
 			allowOutsideClick: false
 		});
 		ws.close();
+		return;
 	}
 
 	let formattedMessage = "";
@@ -384,8 +400,23 @@ function handleStreamAnswerMessage(event, ws, params) {
 
 	/* Working */
 	if (context) {
-		formattedMessage = "<br><br><b>Context:</b><br>" + context;
+		// Create a toggle container for the context
+		const contextId = `context-${Date.now()}`; // Unique ID for each context
+
+		// Append HTML for context with toggle functionality
+		formattedMessage = `
+            <br><br>
+            <b>Context:</b>
+            <span class="toggle-symbol" data-toggle-id="${contextId}">[+]</span>
+            <div id="${contextId}" class="context-content" style="display: none;">${context}</div>
+        `;
 		ws.botMessage.innerHTML += formattedMessage;
+
+		// Add event listener to toggle the visibility
+		const toggleSymbol = document.querySelector(`.toggle-symbol[data-toggle-id="${contextId}"]`);
+		toggleSymbol.addEventListener('click', function () {
+			toggleContext(contextId, toggleSymbol);
+		});
 
 		if (params.answer_per_paper === 'True') {
 			formattedMessage = "<br><b>Answer:</b><br>";
@@ -396,8 +427,21 @@ function handleStreamAnswerMessage(event, ws, params) {
 	}
 
 	if (last_context) {
-		formattedMessage = "<br><br><b>Context:</b><br>" + last_context;
+		const lastContextId = `last-context-${Date.now()}`;
+		formattedMessage = `
+            <br><br>
+            <b>Context:</b>
+            <span class="toggle-symbol" data-toggle-id="${lastContextId}">[+]</span>
+            <div id="${lastContextId}" class="context-content" style="display: none;">${last_context}</div>
+        `;
+		// formattedMessage = "<br><br><b>Context:</b><br>" + last_context;
 		ws.botMessage.innerHTML += formattedMessage;
+
+		// Add event listener to toggle the visibility
+		const toggleSymbol = document.querySelector(`.toggle-symbol[data-toggle-id="${lastContextId}"]`);
+		toggleSymbol.addEventListener('click', function () {
+			toggleContext(lastContextId, toggleSymbol);
+		});
 
 		if (params.rerank == 'False') {
 			ws.close();
@@ -993,6 +1037,7 @@ button_fetch_articles.addEventListener('click', async () => {
 					},
 					allowOutsideClick: false
 				});
+				ws.close(); // Close explicitly
 				return;
 			} else if (result.code === "failure") {
 				console.error(result.code);
@@ -1005,6 +1050,7 @@ button_fetch_articles.addEventListener('click', async () => {
 					},
 					allowOutsideClick: false
 				});
+				ws.close(); // Close explicitly
 				return;
 			} else if (result.code === "success") {
 				console.log(result.code);
@@ -1017,6 +1063,7 @@ button_fetch_articles.addEventListener('click', async () => {
 					},
 					allowOutsideClick: false
 				});
+				ws.close(); // Close explicitly
 				return;
 			}
 		};
@@ -1272,38 +1319,38 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	/* DO Not Delete */
-	// document.getElementById('file-input').addEventListener('change', function (event) {
-	// 	let file = event.target.files[0];
-	// 	if (file.type !== 'application/pdf') {
-	// 		console.error(file.name, 'is not a .pdf file');
-	// 		return;
-	// 	}
+	document.getElementById('file-input').addEventListener('change', function (event) {
+		let file = event.target.files[0];
+		if (file.type !== 'application/pdf') {
+			console.error(file.name, 'is not a .pdf file');
+			return;
+		}
 
-	// 	let fileReader = new FileReader();
-	// 	fileReader.onload = function (event) {
-	// 		let typedArray = new Uint8Array(this.result);
-	// 		pdfjsLib.getDocument(typedArray).promise.then((pdf) => {
-	// 			pdfViewer.setDocument(pdf);
+		let fileReader = new FileReader();
+		fileReader.onload = function (event) {
+			let typedArray = new Uint8Array(this.result);
+			pdfjsLib.getDocument(typedArray).promise.then((pdf) => {
+				pdfViewer.setDocument(pdf);
 
-	// 			// set max value of input field
-	// 			document.getElementById('go-to-page').max = pdf.numPages;
-	// 			document.getElementById('go-to-page').value = 1;
-	// 		});
-	// 	};
-	// 	fileReader.readAsArrayBuffer(file);
-	// });
+				// set max value of input field
+				document.getElementById('go-to-page').max = pdf.numPages;
+				document.getElementById('go-to-page').value = 1;
+			});
+		};
+		fileReader.readAsArrayBuffer(file);
+	});
 	/* DO Not Delete */
 
-	// Temporarily blocking the file upload
-	document.getElementById('file-upload-label').addEventListener('click', function (e) {
-		e.preventDefault();  // Prevent the default behavior of the label
-		Swal.fire({
-			icon: 'info',
-			// title: "In this version pdf upload is disabled",
-			title: "PDF upload is disabled in this version due to limited resources on the cloud server hosting the app. To enable this feature, please set up the app locally by following the instructions in the supplementary file (Additional file 2).",
-			allowOutsideClick: false
-		});
-	});
+	// // Temporarily blocking the file upload
+	// document.getElementById('file-upload-label').addEventListener('click', function (e) {
+	// 	e.preventDefault();  // Prevent the default behavior of the label
+	// 	Swal.fire({
+	// 		icon: 'info',
+	// 		// title: "In this version pdf upload is disabled",
+	// 		title: "PDF upload is disabled in this version due to limited resources on the cloud server hosting the app. To enable this feature, please set up the app locally by following the instructions in the supplementary file (Additional file 2).",
+	// 		allowOutsideClick: false
+	// 	});
+	// });
 
 	document.getElementById('zoom-in').addEventListener('click', function () {
 		pdfViewer.currentScaleValue = pdfViewer.currentScale + 0.5;
@@ -1394,47 +1441,71 @@ document.addEventListener("DOMContentLoaded", function () {
 		let selection = window.getSelection();
 		const text = selection.toString();
 		var llm = document.getElementById('select_llm').value;
-		var py_script_path = 'pycodes/get_summary.py';
+		// var py_script_path = 'pycodes/get_summary.py';
 
 		// Hide action card
 		actionCard.style.display = 'none';
 		// Hide summary card (in case it's already shown)
 		let summaryCard = document.getElementById('summary-card');
 		summaryCard.style.display = 'none';
+
 		// Update summary card content
-		const response = await fetch('/api/runPythonScript', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				py_script_path: py_script_path,
+		try {
+			const end_point = "/summarize_selected_text_PDF"
+			const params = {
 				llm: llm,
 				text: text
-			}),
-		});
-		let result = await response.json();
-		Swal.close();
+			};
+			ws = new WebSocket(wsUrl + end_point);
 
-		/* 	result is an object with a single property 'result' which is a JSON string
-		You need to parse that JSON string to get the actual result object: */
-		console.log(result);
-		result = JSON.parse(result.result);
-		if (result.code == "error") {
-			Swal.fire({
-				icon: 'error',
-				title: "Error in chat completion",
-				text: result.message,
-				allowOutsideClick: false
-			});
-			// isError = true;
-		} else {
-			document.getElementById('summary-content').textContent = result.message;
-			// Show summary card
-			setTimeout(() => {
-				summaryCard.style.display = 'block';
-			}, 0);
-		}
+			ws.onopen = () => {
+				console.log("WebSocket connection opened.");
+				document.getElementById('summary-content').textContent = "";
+				ws.send(JSON.stringify(params));
+			};
+
+			ws.onmessage = (event) => {
+				const data = JSON.parse(event.data);
+				console.log("data", data);
+				const { summary, error, end_summary } = data;
+				Swal.close();
+
+				if (error) {
+					console.error(error);
+					Swal.fire({
+						icon: 'error',
+						title: "Summarization failed",
+						text: error,
+						allowOutsideClick: false
+					});
+					return;
+				}
+
+				if (summary) {
+					document.getElementById('summary-content').textContent += summary;
+					setTimeout(() => {
+						summaryCard.style.display = 'block';
+					}, 0);
+				}
+
+				if (end_summary) {
+					console.log("End of Summary");
+					ws.close();
+				}
+			};
+
+			ws.onerror = (error) => {
+				console.error("WebSocket error:", error);
+				ws.close();
+			};
+
+			ws.onclose = () => {
+				console.log("WebSocket connection closed.");
+			};
+
+		} catch (error) {
+			serverError(error.message);
+		}//try end 
 	});
 
 	// Add an event listener to the close button to hide the summary card when clicked.

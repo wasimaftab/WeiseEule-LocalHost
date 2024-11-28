@@ -39,3 +39,754 @@
 2024-09-04 17:20:02 - weiseeule_logger - INFO - Inside while True:
 2024-09-04 17:20:02 - weiseeule_logger - INFO - Before await websocket.receive_json()
 2024-09-04 17:20:02 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Received params: {'query': 'how to treat diabetes with covid-19? #36'}
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Parsed params: query='how to treat diabetes with covid-19? #36'
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and MedCPT_folder: MedCPT_Embeddings
+2024-11-19 18:14:12 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and All the required files are found
+2024-11-19 18:14:21 - weiseeule_logger - INFO - Actual query is being searched is: how to treat diabetes with covid-19?
+2024-11-19 18:14:22 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 13:01:47 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:01:47 - weiseeule_logger - INFO - params.text = THE ANOPHELES GAMBIAE SPECIES COMPLEX
+Discovery of the role of anopheline species in malaria transmission before the turn of the past cen-
+tury solved one mystery but raised another. “Anophelism without malaria” was a phrase coined to
+describe regions in southern Europe where the presumed vector Anopheles maculipennis was abun-
+dant but where disease transmission was sparse or nonexistent (Hackett 1937). In the early 1920s,
+several researchers hypothesized that this phenomenon could be explained by the existence of
+divergent “races” of A. maculipennis that were nearly identical morphologically but that differed in
+behavior, ecology, and/or physiology. Research over the next two decades conﬁrmed this hypoth-
+esis, and today it is known that what was once called A. maculipennis is actually a group of at least ten
+Palearctic species (Harbach 2004). These species show variation in oviposition sites, host-feeding
+preferences, and vector competence, which helps to explain the substantial geographic variation
+112 White ·Collins ·BesanskyAnnu. Rev. Ecol. Evol. Syst. 2011.42:111-132. Downloaded from www.annualreviews.orgby University of Missouri - Columbia on 05/23/13. For personal use only.
+in historical rates of malaria transmission across Europe. This ﬁrst discovery of sibling species in
+Anopheles not only resolved the paradox of anophelism without malaria but also inﬂuenced sub-
+sequent investigations of other vectors, particularly in cases in which the assumed vector species
+was unusually widespread and apparently plastic in breeding habits and other behaviors. Such was
+the case for A. gambiae, which was not recognized as a species complex until the second half of
+the twentieth century. Below, we revisit the discovery of the complex and more recent attempts
+to understand the genetic and phenotypic differences between these species.
+2024-11-28 13:01:47 - weiseeule_logger - INFO - params.llm = gpt-4o
+2024-11-28 13:01:54 - weiseeule_logger - ERROR - Error in summarize abstracts WebSocket endpoint: (<CloseCode.NO_STATUS_RCVD: 1005>, None)
+2024-11-28 13:04:24 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:04:24 - weiseeule_logger - INFO - params.text = INTRODUCTION
+Female Anopheles mosquitoes are mammalian ectoparasites that are dependent on a proteinaceous
+blood meal for egg production. Similar to their mammalian hosts, the basal lineages of Anopheles
+appear to have diversiﬁed rapidly in association with the separation of South America, Africa,
+and Laurasia ∼120–95 Mya (Krzywinski et al. 2001, Nishihara et al. 2009). Efforts to reconstruct
+Anopheles phylogeny have been complicated not only by these older bursts of radiation but also by
+much more recent bursts leading to the many clusters (complexes) of closely related and isomorphic
+sibling species typical of this taxon (Harbach 2004).
+Anopheles mosquitoes also are the exclusive vectors of mammalian malaria. However, of ∼500
+recognized species, only approximately two to three dozen are important vectors of human malaria,
+and the vast majority of anophelines are of little or no consequence to public health (Collins &
+Paskewitz 1995). In principle, the four traits needed to make a highly efﬁcient human malaria
+vector are known: (a) strong preference for human blood, (b) physiological competence to parasite
+infection, (c) long life, and (d ) high population density. Notably, the rare species that possess all
+four of these traits are not clustered phylogenetically but rather are interdigitated with nonvec-
+tor species in four of six subgenera and even in sibling species complexes. This pattern implies
+recent, rapid, and repeated evolution of traits conferring vectorial efﬁciency. A trigger for the
+repeated emergence of human malaria vectors in different anopheline lineages may have been
+the growth of Neolithic human populations following the development of agriculture, and the
+resulting environmental changes.
+Identifying the yet unknown genetic differences that have allowed a handful of species to be-
+come major malaria vectors is the ultimate goal motivating the complete genome sequencing and
+assembly of ﬁfteen Anopheles species, a project set to launch in 2011 (Besansky 2008). Powerful
+insights about the nature of key evolutionary innovations of vectors can be gained by careful com-
+parison within species complexes—closely related sibling species that differ in vector status—and
+across these replicate systems of vector evolution. Although many if not most malaria vectors
+belong to sibling species complexes, nearly all are severely understudied. A notable exception
+is the Afrotropical Anopheles gambiae complex, whose nominal species was the ﬁrst, and to date
+remains the only, anopheline with a completely sequenced reference genome (Holt et al. 2002).
+The morphologically indistinguishable members of this complex span the vectorial capacity gra-
+dient from major vectors through minor or locally important vectors and nonvectors. Taking the
+A. gambiae complex as a case study and potential model, this review aims to synthesize the substan-
+tial progress made in understanding, at both the genetic and phenotypic levels, the diversiﬁcation
+of these species in relation to humans, malaria, and a heterogeneous environment.
+2024-11-28 13:04:24 - weiseeule_logger - INFO - params.llm = gpt-4o
+2024-11-28 13:04:29 - weiseeule_logger - ERROR - Error in summarize abstracts WebSocket endpoint: (<CloseCode.NO_STATUS_RCVD: 1005>, None)
+2024-11-28 13:07:38 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:07:38 - weiseeule_logger - INFO - params.text = INTRODUCTION
+Female Anopheles mosquitoes are mammalian ectoparasites that are dependent on a proteinaceous
+blood meal for egg production. Similar to their mammalian hosts, the basal lineages of Anopheles
+appear to have diversiﬁed rapidly in association with the separation of South America, Africa,
+and Laurasia ∼120–95 Mya (Krzywinski et al. 2001, Nishihara et al. 2009). Efforts to reconstruct
+Anopheles phylogeny have been complicated not only by these older bursts of radiation but also by
+much more recent bursts leading to the many clusters (complexes) of closely related and isomorphic
+sibling species typical of this taxon (Harbach 2004).
+Anopheles mosquitoes also are the exclusive vectors of mammalian malaria. However, of ∼500
+recognized species, only approximately two to three dozen are important vectors of human malaria,
+and the vast majority of anophelines are of little or no consequence to public health (Collins &
+Paskewitz 1995). In principle, the four traits needed to make a highly efﬁcient human malaria
+vector are known: (a) strong preference for human blood, (b) physiological competence to parasite
+infection, (c) long life, and (d ) high population density. Notably, the rare species that possess all
+four of these traits are not clustered phylogenetically but rather are interdigitated with nonvec-
+tor species in four of six subgenera and even in sibling species complexes. This pattern implies
+recent, rapid, and repeated evolution of traits conferring vectorial efﬁciency. A trigger for the
+repeated emergence of human malaria vectors in different anopheline lineages may have been
+the growth of Neolithic human populations following the development of agriculture, and the
+resulting environmental changes.
+Identifying the yet unknown genetic differences that have allowed a handful of species to be-
+come major malaria vectors is the ultimate goal motivating the complete genome sequencing and
+assembly of ﬁfteen Anopheles species, a project set to launch in 2011 (Besansky 2008). Powerful
+insights about the nature of key evolutionary innovations of vectors can be gained by careful com-
+parison within species complexes—closely related sibling species that differ in vector status—and
+across these replicate systems of vector evolution. Although many if not most malaria vectors
+belong to sibling species complexes, nearly all are severely understudied. A notable exception
+is the Afrotropical Anopheles gambiae complex, whose nominal species was the ﬁrst, and to date
+remains the only, anopheline with a completely sequenced reference genome (Holt et al. 2002).
+The morphologically indistinguishable members of this complex span the vectorial capacity gra-
+dient from major vectors through minor or locally important vectors and nonvectors. Taking the
+A. gambiae complex as a case study and potential model, this review aims to synthesize the substan-
+tial progress made in understanding, at both the genetic and phenotypic levels, the diversiﬁcation
+of these species in relation to humans, malaria, and a heterogeneous environment.
+2024-11-28 13:07:38 - weiseeule_logger - INFO - params.llm = gpt-4o
+2024-11-28 13:07:42 - weiseeule_logger - ERROR - Error in summarize abstracts WebSocket endpoint: (<CloseCode.NO_STATUS_RCVD: 1005>, None)
+2024-11-28 13:09:06 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:09:06 - weiseeule_logger - INFO - params.text = The closely related and morphologically indistinguishable mosquito species
+in the Afrotropical Anopheles gambiae complex differ dramatically in their con-
+tribution to malaria transmission, ranging from major vectors through mi-
+nor or locally important vectors and nonvectors. Radiation of the A. gambiae
+complex and ongoing diversiﬁcation within its nominal species appears to be
+a product of recent and rapid adaptation to environmental heterogeneities,
+notably those of anthropogenic origin. Polytene chromosome and genomic
+analyses suggest that paracentric chromosomal inversions and possibly other
+low-recombination regions have played instrumental roles in this process by
+facilitating ecotypic differentiation both within and across semipermeable
+species boundaries. Forthcoming complete genome sequences from several
+members of the A. gambiae complex will provide powerful tools to acceler-
+ate ongoing investigation of how genetic diversiﬁcation of populations and
+species has shaped behavioral and physiological traits, such as vector com-
+petence, that bear on vectorial importance.
+2024-11-28 13:09:06 - weiseeule_logger - INFO - params.llm = gpt-3.5-turbo-1106
+2024-11-28 13:09:16 - weiseeule_logger - ERROR - Error in summarize abstracts WebSocket endpoint: (<CloseCode.NO_STATUS_RCVD: 1005>, None)
+2024-11-28 13:10:28 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:10:28 - weiseeule_logger - INFO - params.text = Abstract
+The closely related and morphologically indistinguishable mosquito species
+in the Afrotropical Anopheles gambiae complex differ dramatically in their con-
+tribution to malaria transmission, ranging from major vectors through mi-
+nor or locally important vectors and nonvectors. Radiation of the A. gambiae
+complex and ongoing diversiﬁcation within its nominal species appears to be
+a product of recent and rapid adaptation to environmental heterogeneities,
+notably those of anthropogenic origin. Polytene chromosome and genomic
+analyses suggest that paracentric chromosomal inversions and possibly other
+low-recombination regions have played instrumental roles in this process by
+facilitating ecotypic differentiation both within and across semipermeable
+species boundaries. Forthcoming complete genome sequences from several
+members of the A. gambiae complex will provide powerful tools to acceler-
+ate ongoing investigation of how genetic diversiﬁcation of populations and
+species has shaped behavioral and physiological traits, such as vector com-
+petence, that bear on vectorial importance.
+111Annu. Rev. Ecol. Evol. Syst. 2011.42:111-132. Downloaded from www.annualreviews.orgby University of Missouri - Columbia on 05/23/13. For personal use only.
+2024-11-28 13:10:28 - weiseeule_logger - INFO - params.llm = gpt-3.5-turbo-1106
+2024-11-28 13:10:35 - weiseeule_logger - ERROR - Error in summarize abstracts WebSocket endpoint: (<CloseCode.NO_STATUS_RCVD: 1005>, None)
+2024-11-28 13:28:53 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:28:53 - weiseeule_logger - INFO - params.text = Abstract
+The closely related and morphologically indistinguishable mosquito species
+in the Afrotropical Anopheles gambiae complex differ dramatically in their con-
+tribution to malaria transmission, ranging from major vectors through mi-
+nor or locally important vectors and nonvectors. Radiation of the A. gambiae
+complex and ongoing diversiﬁcation within its nominal species appears to be
+a product of recent and rapid adaptation to environmental heterogeneities,
+notably those of anthropogenic origin. Polytene chromosome and genomic
+analyses suggest that paracentric chromosomal inversions and possibly other
+low-recombination regions have played instrumental roles in this process by
+facilitating ecotypic differentiation both within and across semipermeable
+species boundaries. Forthcoming complete genome sequences from several
+members of the A. gambiae complex will provide powerful tools to acceler-
+ate ongoing investigation of how genetic diversiﬁcation of populations and
+species has shaped behavioral and physiological traits, such as vector com-
+petence, that bear on vectorial importance.
+2024-11-28 13:28:53 - weiseeule_logger - INFO - params.llm = gpt-3.5-turbo
+2024-11-28 13:28:54 - weiseeule_logger - INFO - WebSocket disconnected by the client.
+2024-11-28 13:28:54 - weiseeule_logger - INFO - Closing WebSocket connection.
+2024-11-28 13:29:23 - weiseeule_logger - INFO - Inside summarize_selected_text_PDF endpoint()
+2024-11-28 13:29:23 - weiseeule_logger - INFO - params.text = THE ANOPHELES GAMBIAE SPECIES COMPLEX
+Discovery of the role of anopheline species in malaria transmission before the turn of the past cen-
+tury solved one mystery but raised another. “Anophelism without malaria” was a phrase coined to
+describe regions in southern Europe where the presumed vector Anopheles maculipennis was abun-
+dant but where disease transmission was sparse or nonexistent (Hackett 1937). In the early 1920s,
+several researchers hypothesized that this phenomenon could be explained by the existence of
+divergent “races” of A. maculipennis that were nearly identical morphologically but that differed in
+behavior, ecology, and/or physiology. Research over the next two decades conﬁrmed this hypoth-
+esis, and today it is known that what was once called A. maculipennis is actually a group of at least ten
+Palearctic species (Harbach 2004). These species show variation in oviposition sites, host-feeding
+preferences, and vector competence, which helps to explain the substantial geographic variation
+112 White ·Collins ·BesanskyAnnu. Rev. Ecol. Evol. Syst. 2011.42:111-132. Downloaded from www.annualreviews.orgby University of Missouri - Columbia on 05/23/13. For personal use only.
+in historical rates of malaria transmission across Europe. This ﬁrst discovery of sibling species in
+Anopheles not only resolved the paradox of anophelism without malaria but also inﬂuenced sub-
+sequent investigations of other vectors, particularly in cases in which the assumed vector species
+was unusually widespread and apparently plastic in breeding habits and other behaviors. Such was
+the case for A. gambiae, which was not recognized as a species complex until the second half of
+the twentieth century. Below, we revisit the discovery of the complex and more recent attempts
+to understand the genetic and phenotypic differences between these species
+2024-11-28 13:29:23 - weiseeule_logger - INFO - params.llm = gpt-4o
+2024-11-28 13:29:28 - weiseeule_logger - INFO - WebSocket disconnected by the client.
+2024-11-28 13:29:28 - weiseeule_logger - INFO - Closing WebSocket connection.
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Received params: {'query': 'are mrna vaccines safe for children? #36'}
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Parsed params: query='are mrna vaccines safe for children? #36'
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and MedCPT_folder: MedCPT_Embeddings
+2024-11-28 13:37:45 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and All the required files are found
+2024-11-28 13:37:54 - weiseeule_logger - INFO - Actual query is being searched is: are mrna vaccines safe for children?
+2024-11-28 13:37:55 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 13:41:50 - weiseeule_logger - INFO - Insdie summarize_abstracts and received params: {'llm': 'gpt-3.5-turbo-1106', 'pmids': '36621604,36974643,36160352,36048728,36404633,36634021,36694479,36881800,36689319,36405931', 'query': 'are mrna vaccines safe for children? #36'}
+2024-11-28 13:41:50 - weiseeule_logger - INFO - Parsed params: llm='gpt-3.5-turbo-1106' pmids='36621604,36974643,36160352,36048728,36404633,36634021,36694479,36881800,36689319,36405931' query='are mrna vaccines safe for children? #36'
+2024-11-28 13:41:50 - weiseeule_logger - INFO - type(pmids) = <class 'list'>
+2024-11-28 13:41:50 - weiseeule_logger - INFO - Inside process_pmids_and_summarize(...)
+2024-11-28 13:41:50 - weiseeule_logger - INFO - type(pmids) = <class 'list'>
+2024-11-28 13:41:50 - weiseeule_logger - INFO - pmids = ['36621604', '36974643', '36160352', '36048728', '36404633', '36634021', '36694479', '36881800', '36689319', '36405931']
+2024-11-28 13:41:50 - weiseeule_logger - INFO - llm = gpt-3.5-turbo-1106
+2024-11-28 13:41:50 - weiseeule_logger - INFO - query = are mrna vaccines safe for children? #36
+2024-11-28 13:41:55 - weiseeule_logger - INFO - After removing chunk number query = are mrna vaccines safe for children?
+2024-11-28 13:41:59 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 13:58:11 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 13:58:11 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 13:58:24 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 13:58:24 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 13:58:24 - weiseeule_logger - INFO - 19 new pmcids are found, now attempting to append in local db
+2024-11-28 13:58:25 - weiseeule_logger - INFO - Could not find full-text content for PM39589885 hence only Abstract will be added to DB
+2024-11-28 13:58:25 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589885
+2024-11-28 13:58:26 - weiseeule_logger - INFO - Could not find full-text content for PM39585980 hence only Abstract will be added to DB
+2024-11-28 13:58:26 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585980
+2024-11-28 13:58:27 - weiseeule_logger - WARNING - Abstract found in text record for PM39606826 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 13:58:27 - weiseeule_logger - INFO - Could not find full-text content for PM39606826 hence only Abstract will be added to DB
+2024-11-28 13:58:27 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39606826
+2024-11-28 13:58:28 - weiseeule_logger - INFO - Could not find full-text content for PM39601287 hence only Abstract will be added to DB
+2024-11-28 13:58:28 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39601287
+2024-11-28 13:58:29 - weiseeule_logger - INFO - Could not find full-text content for PM39575745 hence only Abstract will be added to DB
+2024-11-28 13:58:29 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39575745
+2024-11-28 13:58:30 - weiseeule_logger - INFO - Could not find full-text content for PM39542705 hence only Abstract will be added to DB
+2024-11-28 13:58:30 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39542705
+2024-11-28 13:58:31 - weiseeule_logger - INFO - Could not find full-text content for PM39604362 hence only Abstract will be added to DB
+2024-11-28 13:58:31 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39604362
+2024-11-28 13:58:32 - weiseeule_logger - WARNING - Abstract found in text record for PM39531260 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 13:58:32 - weiseeule_logger - INFO - Could not find full-text content for PM39531260 hence only Abstract will be added to DB
+2024-11-28 13:58:32 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531260
+2024-11-28 13:58:33 - weiseeule_logger - INFO - Could not find full-text content for PM39531013 hence only Abstract will be added to DB
+2024-11-28 13:58:33 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531013
+2024-11-28 13:58:34 - weiseeule_logger - INFO - Could not find full-text content for PM39530663 hence only Abstract will be added to DB
+2024-11-28 13:58:34 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39530663
+2024-11-28 13:58:35 - weiseeule_logger - INFO - Could not find full-text content for PM39591652 hence only Abstract will be added to DB
+2024-11-28 13:58:35 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39591652
+2024-11-28 13:58:36 - weiseeule_logger - INFO - Could not find full-text content for PM39589726 hence only Abstract will be added to DB
+2024-11-28 13:58:36 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589726
+2024-11-28 13:58:37 - weiseeule_logger - INFO - Could not find full-text content for PM39588909 hence only Abstract will be added to DB
+2024-11-28 13:58:37 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588909
+2024-11-28 13:58:38 - weiseeule_logger - INFO - Could not find full-text content for PM39588871 hence only Abstract will be added to DB
+2024-11-28 13:58:38 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588871
+2024-11-28 13:58:39 - weiseeule_logger - INFO - Could not find full-text content for PM39565307 hence only Abstract will be added to DB
+2024-11-28 13:58:39 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39565307
+2024-11-28 13:58:40 - weiseeule_logger - INFO - Could not find full-text content for PM39549014 hence only Abstract will be added to DB
+2024-11-28 13:58:40 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39549014
+2024-11-28 13:58:41 - weiseeule_logger - INFO - Could not find full-text content for PM39603490 hence only Abstract will be added to DB
+2024-11-28 13:58:41 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39603490
+2024-11-28 13:58:42 - weiseeule_logger - INFO - Could not find full-text content for PM39585665 hence only Abstract will be added to DB
+2024-11-28 13:58:42 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585665
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Could not find full-text content for PM39504036 hence only Abstract will be added to DB
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39504036
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Time elapsed during article download = 32.385 seconds
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Pre-processing and inserting vectors into pinecone db
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39589885, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39585980, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39606826, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39601287, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39575745, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39542705, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39604362, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39531260, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39531013, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39530663, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39591652, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39589726, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39588909, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39588871, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39565307, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39549014, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39603490, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39585665, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - For PubMed id = 39504036, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 13:58:43 - weiseeule_logger - INFO - START Summary create_files_from_excel_columns()>>
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Total abstact texts considered = 19
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Total body texts considered = 0
+2024-11-28 13:58:43 - weiseeule_logger - INFO - END Summary create_files_from_excel_columns()>>
+2024-11-28 13:58:43 - weiseeule_logger - INFO - You have 0 body texts
+2024-11-28 13:58:43 - weiseeule_logger - INFO - Spliliting long body texts into smaller chunks of size = 2000
+2024-11-28 13:58:43 - weiseeule_logger - INFO - After spliliting body into smaller texts you have 0 texts
+2024-11-28 13:58:44 - weiseeule_logger - ERROR - Error in fetch articles WebSocket endpoint: unstructured package not found, please install it with `pip install unstructured`
+2024-11-28 14:02:34 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:02:34 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:02:46 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:02:46 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:02:46 - weiseeule_logger - CRITICAL - No new pmids are found, therefore nothing will be appended in local db, article downloader will exit now
+2024-11-28 14:02:53 - weiseeule_logger - ERROR - Error in fetch articles WebSocket endpoint: (1001, None)
+2024-11-28 14:03:52 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:03:52 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:04:05 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:04:05 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:04:05 - weiseeule_logger - INFO - 19 new pmcids are found, now attempting to append in local db
+2024-11-28 14:04:06 - weiseeule_logger - INFO - Could not find full-text content for PM39589885 hence only Abstract will be added to DB
+2024-11-28 14:04:06 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589885
+2024-11-28 14:04:07 - weiseeule_logger - INFO - Could not find full-text content for PM39585980 hence only Abstract will be added to DB
+2024-11-28 14:04:07 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585980
+2024-11-28 14:04:08 - weiseeule_logger - WARNING - Abstract found in text record for PM39606826 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:04:08 - weiseeule_logger - INFO - Could not find full-text content for PM39606826 hence only Abstract will be added to DB
+2024-11-28 14:04:08 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39606826
+2024-11-28 14:04:09 - weiseeule_logger - INFO - Could not find full-text content for PM39601287 hence only Abstract will be added to DB
+2024-11-28 14:04:09 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39601287
+2024-11-28 14:04:10 - weiseeule_logger - INFO - Could not find full-text content for PM39575745 hence only Abstract will be added to DB
+2024-11-28 14:04:10 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39575745
+2024-11-28 14:04:11 - weiseeule_logger - INFO - Could not find full-text content for PM39542705 hence only Abstract will be added to DB
+2024-11-28 14:04:12 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39542705
+2024-11-28 14:04:13 - weiseeule_logger - INFO - Could not find full-text content for PM39604362 hence only Abstract will be added to DB
+2024-11-28 14:04:13 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39604362
+2024-11-28 14:04:14 - weiseeule_logger - WARNING - Abstract found in text record for PM39531260 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:04:14 - weiseeule_logger - INFO - Could not find full-text content for PM39531260 hence only Abstract will be added to DB
+2024-11-28 14:04:14 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531260
+2024-11-28 14:04:15 - weiseeule_logger - INFO - Could not find full-text content for PM39531013 hence only Abstract will be added to DB
+2024-11-28 14:04:15 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531013
+2024-11-28 14:04:15 - weiseeule_logger - INFO - Could not find full-text content for PM39530663 hence only Abstract will be added to DB
+2024-11-28 14:04:15 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39530663
+2024-11-28 14:04:16 - weiseeule_logger - INFO - Could not find full-text content for PM39591652 hence only Abstract will be added to DB
+2024-11-28 14:04:16 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39591652
+2024-11-28 14:04:18 - weiseeule_logger - INFO - Could not find full-text content for PM39589726 hence only Abstract will be added to DB
+2024-11-28 14:04:18 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589726
+2024-11-28 14:04:19 - weiseeule_logger - INFO - Could not find full-text content for PM39588909 hence only Abstract will be added to DB
+2024-11-28 14:04:19 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588909
+2024-11-28 14:04:19 - weiseeule_logger - INFO - Could not find full-text content for PM39588871 hence only Abstract will be added to DB
+2024-11-28 14:04:20 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588871
+2024-11-28 14:04:21 - weiseeule_logger - INFO - Could not find full-text content for PM39565307 hence only Abstract will be added to DB
+2024-11-28 14:04:21 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39565307
+2024-11-28 14:04:21 - weiseeule_logger - INFO - Could not find full-text content for PM39549014 hence only Abstract will be added to DB
+2024-11-28 14:04:21 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39549014
+2024-11-28 14:04:22 - weiseeule_logger - INFO - Could not find full-text content for PM39603490 hence only Abstract will be added to DB
+2024-11-28 14:04:22 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39603490
+2024-11-28 14:04:23 - weiseeule_logger - INFO - Could not find full-text content for PM39585665 hence only Abstract will be added to DB
+2024-11-28 14:04:23 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585665
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Could not find full-text content for PM39504036 hence only Abstract will be added to DB
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39504036
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Time elapsed during article download = 31.764 seconds
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Pre-processing and inserting vectors into pinecone db
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39589885, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39585980, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39606826, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39601287, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39575745, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39542705, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39604362, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39531260, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39531013, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39530663, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39591652, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39589726, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39588909, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39588871, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39565307, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39549014, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39603490, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39585665, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - For PubMed id = 39504036, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:04:24 - weiseeule_logger - INFO - START Summary create_files_from_excel_columns()>>
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Total abstact texts considered = 19
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Total body texts considered = 0
+2024-11-28 14:04:24 - weiseeule_logger - INFO - END Summary create_files_from_excel_columns()>>
+2024-11-28 14:04:24 - weiseeule_logger - INFO - You have 0 body texts
+2024-11-28 14:04:24 - weiseeule_logger - INFO - Spliliting long body texts into smaller chunks of size = 2000
+2024-11-28 14:04:24 - weiseeule_logger - INFO - After spliliting body into smaller texts you have 0 texts
+2024-11-28 14:04:28 - weiseeule_logger - INFO - After merging abstracts with body texts you have 19 texts
+2024-11-28 14:04:28 - weiseeule_logger - INFO - Inside push_vectors_into_pinecone()
+2024-11-28 14:04:29 - weiseeule_logger - INFO - The namespace phase_separation_MedCPT does not yet exist, will be created, hence in the beginning number of vectors in namespace phase_separation_MedCPT is: 0
+2024-11-28 14:04:29 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = chunk and max_length = 512
+2024-11-28 14:04:31 - weiseeule_logger - INFO - Pushing 19 vectors into Pinecone
+2024-11-28 14:04:32 - weiseeule_logger - INFO - Vectors pushed successfully into pinecone DB
+2024-11-28 14:04:32 - weiseeule_logger - INFO - Time taken to fetch articles and insert into local DB = 39.532 seconds
+2024-11-28 14:05:24 - weiseeule_logger - ERROR - Error in fetch articles WebSocket endpoint: (1001, None)
+2024-11-28 14:08:29 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:08:29 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:08:47 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:08:47 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:08:47 - weiseeule_logger - CRITICAL - No new pmids are found, therefore nothing will be appended in local db, article downloader will exit now
+2024-11-28 14:09:11 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:09:11 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:09:24 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:09:24 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:09:24 - weiseeule_logger - INFO - 19 new pmcids are found, now attempting to append in local db
+2024-11-28 14:09:25 - weiseeule_logger - INFO - Could not find full-text content for PM39589885 hence only Abstract will be added to DB
+2024-11-28 14:09:25 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589885
+2024-11-28 14:09:25 - weiseeule_logger - INFO - Could not find full-text content for PM39585980 hence only Abstract will be added to DB
+2024-11-28 14:09:25 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585980
+2024-11-28 14:09:26 - weiseeule_logger - WARNING - Abstract found in text record for PM39606826 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:09:26 - weiseeule_logger - INFO - Could not find full-text content for PM39606826 hence only Abstract will be added to DB
+2024-11-28 14:09:26 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39606826
+2024-11-28 14:09:27 - weiseeule_logger - INFO - Could not find full-text content for PM39601287 hence only Abstract will be added to DB
+2024-11-28 14:09:27 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39601287
+2024-11-28 14:09:28 - weiseeule_logger - INFO - Could not find full-text content for PM39575745 hence only Abstract will be added to DB
+2024-11-28 14:09:28 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39575745
+2024-11-28 14:09:29 - weiseeule_logger - INFO - Could not find full-text content for PM39542705 hence only Abstract will be added to DB
+2024-11-28 14:09:29 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39542705
+2024-11-28 14:09:30 - weiseeule_logger - INFO - Could not find full-text content for PM39604362 hence only Abstract will be added to DB
+2024-11-28 14:09:30 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39604362
+2024-11-28 14:09:31 - weiseeule_logger - WARNING - Abstract found in text record for PM39531260 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:09:31 - weiseeule_logger - INFO - Could not find full-text content for PM39531260 hence only Abstract will be added to DB
+2024-11-28 14:09:31 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531260
+2024-11-28 14:09:32 - weiseeule_logger - INFO - Could not find full-text content for PM39531013 hence only Abstract will be added to DB
+2024-11-28 14:09:32 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531013
+2024-11-28 14:09:33 - weiseeule_logger - INFO - Could not find full-text content for PM39530663 hence only Abstract will be added to DB
+2024-11-28 14:09:33 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39530663
+2024-11-28 14:09:34 - weiseeule_logger - INFO - Could not find full-text content for PM39591652 hence only Abstract will be added to DB
+2024-11-28 14:09:34 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39591652
+2024-11-28 14:09:35 - weiseeule_logger - INFO - Could not find full-text content for PM39589726 hence only Abstract will be added to DB
+2024-11-28 14:09:35 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589726
+2024-11-28 14:09:36 - weiseeule_logger - INFO - Could not find full-text content for PM39588909 hence only Abstract will be added to DB
+2024-11-28 14:09:36 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588909
+2024-11-28 14:09:37 - weiseeule_logger - INFO - Could not find full-text content for PM39588871 hence only Abstract will be added to DB
+2024-11-28 14:09:37 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588871
+2024-11-28 14:09:38 - weiseeule_logger - INFO - Could not find full-text content for PM39565307 hence only Abstract will be added to DB
+2024-11-28 14:09:38 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39565307
+2024-11-28 14:09:39 - weiseeule_logger - INFO - Could not find full-text content for PM39549014 hence only Abstract will be added to DB
+2024-11-28 14:09:39 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39549014
+2024-11-28 14:09:41 - weiseeule_logger - INFO - Could not find full-text content for PM39603490 hence only Abstract will be added to DB
+2024-11-28 14:09:41 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39603490
+2024-11-28 14:09:42 - weiseeule_logger - INFO - Could not find full-text content for PM39585665 hence only Abstract will be added to DB
+2024-11-28 14:09:42 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585665
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Could not find full-text content for PM39504036 hence only Abstract will be added to DB
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39504036
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Time elapsed during article download = 32.042 seconds
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Pre-processing and inserting vectors into pinecone db
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39589885, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39585980, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39606826, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39601287, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39575745, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39542705, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39604362, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39531260, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39531013, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39530663, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39591652, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39589726, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39588909, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39588871, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39565307, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39549014, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39603490, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39585665, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - For PubMed id = 39504036, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:09:43 - weiseeule_logger - INFO - START Summary create_files_from_excel_columns()>>
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Total abstact texts considered = 19
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Total body texts considered = 0
+2024-11-28 14:09:43 - weiseeule_logger - INFO - END Summary create_files_from_excel_columns()>>
+2024-11-28 14:09:43 - weiseeule_logger - INFO - You have 0 body texts
+2024-11-28 14:09:43 - weiseeule_logger - INFO - Spliliting long body texts into smaller chunks of size = 2000
+2024-11-28 14:09:43 - weiseeule_logger - INFO - After spliliting body into smaller texts you have 0 texts
+2024-11-28 14:09:45 - weiseeule_logger - INFO - After merging abstracts with body texts you have 19 texts
+2024-11-28 14:09:45 - weiseeule_logger - INFO - Inside push_vectors_into_pinecone()
+2024-11-28 14:09:46 - weiseeule_logger - INFO - The namespace phase_separation_MedCPT does not yet exist, will be created, hence in the beginning number of vectors in namespace phase_separation_MedCPT is: 0
+2024-11-28 14:09:46 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = chunk and max_length = 512
+2024-11-28 14:09:48 - weiseeule_logger - INFO - Pushing 19 vectors into Pinecone
+2024-11-28 14:09:48 - weiseeule_logger - INFO - Vectors pushed successfully into pinecone DB
+2024-11-28 14:09:48 - weiseeule_logger - INFO - Time taken to fetch articles and insert into local DB = 37.72 seconds
+2024-11-28 14:12:07 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:12:07 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:12:49 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:12:49 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:13:03 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:13:03 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:13:03 - weiseeule_logger - INFO - 19 new pmcids are found, now attempting to append in local db
+2024-11-28 14:13:04 - weiseeule_logger - INFO - Could not find full-text content for PM39589885 hence only Abstract will be added to DB
+2024-11-28 14:13:04 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589885
+2024-11-28 14:13:05 - weiseeule_logger - INFO - Could not find full-text content for PM39585980 hence only Abstract will be added to DB
+2024-11-28 14:13:05 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585980
+2024-11-28 14:13:07 - weiseeule_logger - WARNING - Abstract found in text record for PM39606826 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:13:07 - weiseeule_logger - INFO - Could not find full-text content for PM39606826 hence only Abstract will be added to DB
+2024-11-28 14:13:07 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39606826
+2024-11-28 14:13:08 - weiseeule_logger - INFO - Could not find full-text content for PM39601287 hence only Abstract will be added to DB
+2024-11-28 14:13:08 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39601287
+2024-11-28 14:13:09 - weiseeule_logger - INFO - Could not find full-text content for PM39575745 hence only Abstract will be added to DB
+2024-11-28 14:13:09 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39575745
+2024-11-28 14:13:10 - weiseeule_logger - INFO - Could not find full-text content for PM39542705 hence only Abstract will be added to DB
+2024-11-28 14:13:10 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39542705
+2024-11-28 14:13:11 - weiseeule_logger - INFO - Could not find full-text content for PM39604362 hence only Abstract will be added to DB
+2024-11-28 14:13:11 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39604362
+2024-11-28 14:13:12 - weiseeule_logger - WARNING - Abstract found in text record for PM39531260 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:13:12 - weiseeule_logger - INFO - Could not find full-text content for PM39531260 hence only Abstract will be added to DB
+2024-11-28 14:13:12 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531260
+2024-11-28 14:13:13 - weiseeule_logger - INFO - Could not find full-text content for PM39531013 hence only Abstract will be added to DB
+2024-11-28 14:13:13 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531013
+2024-11-28 14:13:14 - weiseeule_logger - INFO - Could not find full-text content for PM39530663 hence only Abstract will be added to DB
+2024-11-28 14:13:14 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39530663
+2024-11-28 14:13:15 - weiseeule_logger - INFO - Could not find full-text content for PM39591652 hence only Abstract will be added to DB
+2024-11-28 14:13:15 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39591652
+2024-11-28 14:13:16 - weiseeule_logger - INFO - Could not find full-text content for PM39589726 hence only Abstract will be added to DB
+2024-11-28 14:13:16 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589726
+2024-11-28 14:13:17 - weiseeule_logger - INFO - Could not find full-text content for PM39588909 hence only Abstract will be added to DB
+2024-11-28 14:13:17 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588909
+2024-11-28 14:13:18 - weiseeule_logger - INFO - Could not find full-text content for PM39588871 hence only Abstract will be added to DB
+2024-11-28 14:13:19 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588871
+2024-11-28 14:13:20 - weiseeule_logger - INFO - Could not find full-text content for PM39565307 hence only Abstract will be added to DB
+2024-11-28 14:13:20 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39565307
+2024-11-28 14:13:20 - weiseeule_logger - INFO - Could not find full-text content for PM39549014 hence only Abstract will be added to DB
+2024-11-28 14:13:20 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39549014
+2024-11-28 14:13:21 - weiseeule_logger - INFO - Could not find full-text content for PM39603490 hence only Abstract will be added to DB
+2024-11-28 14:13:21 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39603490
+2024-11-28 14:13:22 - weiseeule_logger - INFO - Could not find full-text content for PM39585665 hence only Abstract will be added to DB
+2024-11-28 14:13:22 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585665
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Could not find full-text content for PM39504036 hence only Abstract will be added to DB
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39504036
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Time elapsed during article download = 34.263 seconds
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Pre-processing and inserting vectors into pinecone db
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39589885, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39585980, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39606826, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39601287, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39575745, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39542705, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39604362, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39531260, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39531013, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39530663, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39591652, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39589726, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39588909, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39588871, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39565307, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39549014, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39603490, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39585665, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - For PubMed id = 39504036, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:13:23 - weiseeule_logger - INFO - START Summary create_files_from_excel_columns()>>
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Total abstact texts considered = 19
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Total body texts considered = 0
+2024-11-28 14:13:23 - weiseeule_logger - INFO - END Summary create_files_from_excel_columns()>>
+2024-11-28 14:13:23 - weiseeule_logger - INFO - You have 0 body texts
+2024-11-28 14:13:23 - weiseeule_logger - INFO - Spliliting long body texts into smaller chunks of size = 2000
+2024-11-28 14:13:23 - weiseeule_logger - INFO - After spliliting body into smaller texts you have 0 texts
+2024-11-28 14:13:24 - weiseeule_logger - INFO - After merging abstracts with body texts you have 19 texts
+2024-11-28 14:13:24 - weiseeule_logger - INFO - Inside push_vectors_into_pinecone()
+2024-11-28 14:13:24 - weiseeule_logger - INFO - The namespace phase_separation_MedCPT does not yet exist, will be created, hence in the beginning number of vectors in namespace phase_separation_MedCPT is: 0
+2024-11-28 14:13:24 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = chunk and max_length = 512
+2024-11-28 14:13:26 - weiseeule_logger - INFO - Pushing 19 vectors into Pinecone
+2024-11-28 14:13:26 - weiseeule_logger - INFO - Vectors pushed successfully into pinecone DB
+2024-11-28 14:13:26 - weiseeule_logger - INFO - Time taken to fetch articles and insert into local DB = 37.404 seconds
+2024-11-28 14:14:45 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:15:40 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:15:40 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:15:55 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:15:55 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:15:55 - weiseeule_logger - INFO - 19 new pmcids are found, now attempting to append in local db
+2024-11-28 14:15:56 - weiseeule_logger - INFO - Could not find full-text content for PM39589885 hence only Abstract will be added to DB
+2024-11-28 14:15:56 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589885
+2024-11-28 14:15:57 - weiseeule_logger - INFO - Could not find full-text content for PM39585980 hence only Abstract will be added to DB
+2024-11-28 14:15:57 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585980
+2024-11-28 14:15:58 - weiseeule_logger - WARNING - Abstract found in text record for PM39606826 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:15:58 - weiseeule_logger - INFO - Could not find full-text content for PM39606826 hence only Abstract will be added to DB
+2024-11-28 14:15:58 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39606826
+2024-11-28 14:15:59 - weiseeule_logger - INFO - Could not find full-text content for PM39601287 hence only Abstract will be added to DB
+2024-11-28 14:15:59 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39601287
+2024-11-28 14:16:00 - weiseeule_logger - INFO - Could not find full-text content for PM39575745 hence only Abstract will be added to DB
+2024-11-28 14:16:00 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39575745
+2024-11-28 14:16:01 - weiseeule_logger - INFO - Could not find full-text content for PM39542705 hence only Abstract will be added to DB
+2024-11-28 14:16:01 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39542705
+2024-11-28 14:16:02 - weiseeule_logger - INFO - Could not find full-text content for PM39604362 hence only Abstract will be added to DB
+2024-11-28 14:16:02 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39604362
+2024-11-28 14:16:03 - weiseeule_logger - WARNING - Abstract found in text record for PM39531260 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:16:03 - weiseeule_logger - INFO - Could not find full-text content for PM39531260 hence only Abstract will be added to DB
+2024-11-28 14:16:03 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531260
+2024-11-28 14:16:04 - weiseeule_logger - INFO - Could not find full-text content for PM39531013 hence only Abstract will be added to DB
+2024-11-28 14:16:04 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531013
+2024-11-28 14:16:05 - weiseeule_logger - INFO - Could not find full-text content for PM39530663 hence only Abstract will be added to DB
+2024-11-28 14:16:05 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39530663
+2024-11-28 14:16:06 - weiseeule_logger - INFO - Could not find full-text content for PM39591652 hence only Abstract will be added to DB
+2024-11-28 14:16:06 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39591652
+2024-11-28 14:16:07 - weiseeule_logger - INFO - Could not find full-text content for PM39589726 hence only Abstract will be added to DB
+2024-11-28 14:16:07 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589726
+2024-11-28 14:16:08 - weiseeule_logger - INFO - Could not find full-text content for PM39588909 hence only Abstract will be added to DB
+2024-11-28 14:16:08 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588909
+2024-11-28 14:16:09 - weiseeule_logger - INFO - Could not find full-text content for PM39588871 hence only Abstract will be added to DB
+2024-11-28 14:16:09 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588871
+2024-11-28 14:16:10 - weiseeule_logger - INFO - Could not find full-text content for PM39565307 hence only Abstract will be added to DB
+2024-11-28 14:16:10 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39565307
+2024-11-28 14:16:11 - weiseeule_logger - INFO - Could not find full-text content for PM39549014 hence only Abstract will be added to DB
+2024-11-28 14:16:11 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39549014
+2024-11-28 14:16:11 - weiseeule_logger - INFO - Could not find full-text content for PM39603490 hence only Abstract will be added to DB
+2024-11-28 14:16:11 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39603490
+2024-11-28 14:16:12 - weiseeule_logger - INFO - Could not find full-text content for PM39585665 hence only Abstract will be added to DB
+2024-11-28 14:16:12 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585665
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Could not find full-text content for PM39504036 hence only Abstract will be added to DB
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39504036
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Time elapsed during article download = 33.178 seconds
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Pre-processing and inserting vectors into pinecone db
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39589885, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39585980, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39606826, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39601287, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39575745, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39542705, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39604362, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39531260, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39531013, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39530663, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39591652, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39589726, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39588909, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39588871, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39565307, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39549014, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39603490, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39585665, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - For PubMed id = 39504036, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:16:13 - weiseeule_logger - INFO - START Summary create_files_from_excel_columns()>>
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Total abstact texts considered = 19
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Total body texts considered = 0
+2024-11-28 14:16:13 - weiseeule_logger - INFO - END Summary create_files_from_excel_columns()>>
+2024-11-28 14:16:13 - weiseeule_logger - INFO - You have 0 body texts
+2024-11-28 14:16:13 - weiseeule_logger - INFO - Spliliting long body texts into smaller chunks of size = 2000
+2024-11-28 14:16:13 - weiseeule_logger - INFO - After spliliting body into smaller texts you have 0 texts
+2024-11-28 14:16:15 - weiseeule_logger - INFO - After merging abstracts with body texts you have 19 texts
+2024-11-28 14:16:15 - weiseeule_logger - INFO - Inside push_vectors_into_pinecone()
+2024-11-28 14:16:16 - weiseeule_logger - INFO - The namespace phase_separation_MedCPT does not yet exist, will be created, hence in the beginning number of vectors in namespace phase_separation_MedCPT is: 0
+2024-11-28 14:16:16 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = chunk and max_length = 512
+2024-11-28 14:16:18 - weiseeule_logger - INFO - Pushing 19 vectors into Pinecone
+2024-11-28 14:16:18 - weiseeule_logger - INFO - Vectors pushed successfully into pinecone DB
+2024-11-28 14:16:18 - weiseeule_logger - INFO - Time taken to fetch articles and insert into local DB = 38.422 seconds
+2024-11-28 14:22:42 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:27:14 - weiseeule_logger - INFO - Inside fetch_articles endpoint()
+2024-11-28 14:27:14 - weiseeule_logger - INFO - params = embedd_model='MedCPT' keywords='phase separation' start_date='2024/11/25' end_date='2024/11/28'
+2024-11-28 14:27:29 - weiseeule_logger - INFO - Found 19 articles published between 2024/11/25 and 2024/11/28 in pubmed
+2024-11-28 14:27:29 - weiseeule_logger - INFO - Checking before appending to db if the pmids/pmcids are unique
+2024-11-28 14:27:29 - weiseeule_logger - INFO - 19 new pmcids are found, now attempting to append in local db
+2024-11-28 14:27:30 - weiseeule_logger - INFO - Could not find full-text content for PM39589885 hence only Abstract will be added to DB
+2024-11-28 14:27:30 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589885
+2024-11-28 14:27:31 - weiseeule_logger - INFO - Could not find full-text content for PM39585980 hence only Abstract will be added to DB
+2024-11-28 14:27:31 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585980
+2024-11-28 14:27:32 - weiseeule_logger - WARNING - Abstract found in text record for PM39606826 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:27:32 - weiseeule_logger - INFO - Could not find full-text content for PM39606826 hence only Abstract will be added to DB
+2024-11-28 14:27:32 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39606826
+2024-11-28 14:27:33 - weiseeule_logger - INFO - Could not find full-text content for PM39601287 hence only Abstract will be added to DB
+2024-11-28 14:27:33 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39601287
+2024-11-28 14:27:33 - weiseeule_logger - INFO - Could not find full-text content for PM39575745 hence only Abstract will be added to DB
+2024-11-28 14:27:34 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39575745
+2024-11-28 14:27:35 - weiseeule_logger - INFO - Could not find full-text content for PM39542705 hence only Abstract will be added to DB
+2024-11-28 14:27:35 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39542705
+2024-11-28 14:27:36 - weiseeule_logger - INFO - Could not find full-text content for PM39604362 hence only Abstract will be added to DB
+2024-11-28 14:27:36 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39604362
+2024-11-28 14:27:37 - weiseeule_logger - WARNING - Abstract found in text record for PM39531260 but `phase separation` is not mentioned there, you might wanna take a look when chunks do not look reasonable
+2024-11-28 14:27:37 - weiseeule_logger - INFO - Could not find full-text content for PM39531260 hence only Abstract will be added to DB
+2024-11-28 14:27:37 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531260
+2024-11-28 14:27:38 - weiseeule_logger - INFO - Could not find full-text content for PM39531013 hence only Abstract will be added to DB
+2024-11-28 14:27:38 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39531013
+2024-11-28 14:27:39 - weiseeule_logger - INFO - Could not find full-text content for PM39530663 hence only Abstract will be added to DB
+2024-11-28 14:27:39 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39530663
+2024-11-28 14:27:39 - weiseeule_logger - INFO - Could not find full-text content for PM39591652 hence only Abstract will be added to DB
+2024-11-28 14:27:39 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39591652
+2024-11-28 14:27:40 - weiseeule_logger - INFO - Could not find full-text content for PM39589726 hence only Abstract will be added to DB
+2024-11-28 14:27:40 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39589726
+2024-11-28 14:27:41 - weiseeule_logger - INFO - Could not find full-text content for PM39588909 hence only Abstract will be added to DB
+2024-11-28 14:27:41 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588909
+2024-11-28 14:27:42 - weiseeule_logger - INFO - Could not find full-text content for PM39588871 hence only Abstract will be added to DB
+2024-11-28 14:27:42 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39588871
+2024-11-28 14:27:43 - weiseeule_logger - INFO - Could not find full-text content for PM39565307 hence only Abstract will be added to DB
+2024-11-28 14:27:43 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39565307
+2024-11-28 14:27:44 - weiseeule_logger - INFO - Could not find full-text content for PM39549014 hence only Abstract will be added to DB
+2024-11-28 14:27:44 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39549014
+2024-11-28 14:27:45 - weiseeule_logger - INFO - Could not find full-text content for PM39603490 hence only Abstract will be added to DB
+2024-11-28 14:27:45 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39603490
+2024-11-28 14:27:46 - weiseeule_logger - INFO - Could not find full-text content for PM39585665 hence only Abstract will be added to DB
+2024-11-28 14:27:46 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39585665
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Could not find full-text content for PM39504036 hence only Abstract will be added to DB
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Sucessfully inserted data into DB for PM39504036
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Time elapsed during article download = 33.385 seconds
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Pre-processing and inserting vectors into pinecone db
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39589885, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39585980, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39606826, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39601287, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39575745, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39542705, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39604362, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39531260, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39531013, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39530663, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39591652, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39589726, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39588909, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39588871, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39565307, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39549014, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39603490, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39585665, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - For PubMed id = 39504036, body text has 0 words, which is less than 300 hence body is ignored
+2024-11-28 14:27:47 - weiseeule_logger - INFO - START Summary create_files_from_excel_columns()>>
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Total abstact texts considered = 19
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Total body texts considered = 0
+2024-11-28 14:27:47 - weiseeule_logger - INFO - END Summary create_files_from_excel_columns()>>
+2024-11-28 14:27:47 - weiseeule_logger - INFO - You have 0 body texts
+2024-11-28 14:27:47 - weiseeule_logger - INFO - Spliliting long body texts into smaller chunks of size = 2000
+2024-11-28 14:27:47 - weiseeule_logger - INFO - After spliliting body into smaller texts you have 0 texts
+2024-11-28 14:27:49 - weiseeule_logger - INFO - After merging abstracts with body texts you have 19 texts
+2024-11-28 14:27:49 - weiseeule_logger - INFO - Inside push_vectors_into_pinecone()
+2024-11-28 14:27:51 - weiseeule_logger - INFO - The namespace phase_separation_MedCPT does not yet exist, will be created, hence in the beginning number of vectors in namespace phase_separation_MedCPT is: 0
+2024-11-28 14:27:51 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = chunk and max_length = 512
+2024-11-28 14:27:53 - weiseeule_logger - INFO - Pushing 19 vectors into Pinecone
+2024-11-28 14:27:54 - weiseeule_logger - INFO - Vectors pushed successfully into pinecone DB
+2024-11-28 14:27:54 - weiseeule_logger - INFO - Time taken to fetch articles and insert into local DB = 40.043 seconds
+2024-11-28 14:27:54 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Inside websocket_endpoint()
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Received params: {'llm': 'gpt-3.5-turbo-1106', 'temp': 0, 'namespace': 'phase_separation_MedCPT', 'query': 'what is the importance of phase separation in a cell?', 'template': '', 'embedd_model': 'MedCPT', 'paper_id': '-1', 'answer_per_paper': 'False', 'chunks_from_one_paper': 'False', 'fix_keyword': 'True', 'rerank': 'False', 'top_k': '10'}
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Parsed params: llm='gpt-3.5-turbo-1106' temp=0.0 namespace='phase_separation_MedCPT' query='what is the importance of phase separation in a cell?' template='' embedd_model='MedCPT' paper_id='-1' answer_per_paper='False' chunks_from_one_paper='False' fix_keyword='True' rerank='False' top_k='10'
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Inside fastAPI app, before calling qa.scientific_qa_bot_GUI_stream() query = what is the importance of phase separation in a cell?
+2024-11-28 14:28:58 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = query and max_length = 64
+2024-11-28 14:29:03 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 14:29:03 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 14:29:03 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Inside websocket_endpoint()
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Received params: {'llm': 'gpt-3.5-turbo-1106', 'temp': 0, 'namespace': 'phase_separation_MedCPT', 'query': 'what is the importance of phase separation in a cell?', 'template': '', 'embedd_model': 'MedCPT', 'paper_id': '-1', 'answer_per_paper': 'False', 'chunks_from_one_paper': 'False', 'fix_keyword': 'True', 'rerank': 'False', 'top_k': '10'}
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Parsed params: llm='gpt-3.5-turbo-1106' temp=0.0 namespace='phase_separation_MedCPT' query='what is the importance of phase separation in a cell?' template='' embedd_model='MedCPT' paper_id='-1' answer_per_paper='False' chunks_from_one_paper='False' fix_keyword='True' rerank='False' top_k='10'
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Inside fastAPI app, before calling qa.scientific_qa_bot_GUI_stream() query = what is the importance of phase separation in a cell?
+2024-11-28 14:43:59 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = query and max_length = 64
+2024-11-28 14:44:02 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 14:44:02 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 14:44:02 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 14:48:34 - weiseeule_logger - INFO - Inside websocket_endpoint()
+2024-11-28 14:48:34 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 14:48:34 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 14:48:34 - weiseeule_logger - INFO - Received params: {'llm': 'gpt-3.5-turbo-1106', 'temp': 0, 'namespace': 'phase_separation_MedCPT', 'query': 'what is the importance of phase separation in a cell?', 'template': '', 'embedd_model': 'MedCPT', 'paper_id': '-1', 'answer_per_paper': 'False', 'chunks_from_one_paper': 'False', 'fix_keyword': 'True', 'rerank': 'False', 'top_k': '10'}
+2024-11-28 14:48:34 - weiseeule_logger - INFO - Parsed params: llm='gpt-3.5-turbo-1106' temp=0.0 namespace='phase_separation_MedCPT' query='what is the importance of phase separation in a cell?' template='' embedd_model='MedCPT' paper_id='-1' answer_per_paper='False' chunks_from_one_paper='False' fix_keyword='True' rerank='False' top_k='10'
+2024-11-28 14:48:34 - weiseeule_logger - INFO - Inside fastAPI app, before calling qa.scientific_qa_bot_GUI_stream() query = what is the importance of phase separation in a cell?
+2024-11-28 14:48:35 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = query and max_length = 64
+2024-11-28 14:48:39 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 14:48:39 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 14:48:39 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Inside websocket_endpoint()
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Received params: {'llm': 'gpt-3.5-turbo-1106', 'temp': 0, 'namespace': 'phase_separation_MedCPT', 'query': 'what is phase separation?', 'template': '', 'embedd_model': 'MedCPT', 'paper_id': '-1', 'answer_per_paper': 'False', 'chunks_from_one_paper': 'False', 'fix_keyword': 'True', 'rerank': 'False', 'top_k': '10'}
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Parsed params: llm='gpt-3.5-turbo-1106' temp=0.0 namespace='phase_separation_MedCPT' query='what is phase separation?' template='' embedd_model='MedCPT' paper_id='-1' answer_per_paper='False' chunks_from_one_paper='False' fix_keyword='True' rerank='False' top_k='10'
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Inside fastAPI app, before calling qa.scientific_qa_bot_GUI_stream() query = what is phase separation?
+2024-11-28 16:22:54 - weiseeule_logger - INFO - Inside get_text_embeddings(), text_type = query and max_length = 64
+2024-11-28 16:22:58 - weiseeule_logger - INFO - Inside while True:
+2024-11-28 16:22:58 - weiseeule_logger - INFO - Before await websocket.receive_json()
+2024-11-28 16:22:58 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 16:23:29 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-11-28 16:23:29 - weiseeule_logger - INFO - Received params: {'query': 'what is the importance of phase separation in a protein protein interaction?'}
+2024-11-28 16:23:29 - weiseeule_logger - INFO - Parsed params: query='what is the importance of phase separation in a protein protein interaction?'
+2024-11-28 16:23:29 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-28 16:23:29 - weiseeule_logger - INFO - query does not contain #
+2024-11-28 16:23:29 - weiseeule_logger - INFO - WebSocket disconnected
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Inside search pubmed websocket endpoint
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Received params: {'query': 'what is the importance of phase separation in a protein protein interaction? #36'}
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Parsed params: query='what is the importance of phase separation in a protein protein interaction? #36'
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and pwd: /home/wasim/Desktop/WeiseEule-LocalHost
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Inside async def search_necessary_files(...) and MedCPT_folder: MedCPT_Embeddings
+2024-11-28 16:23:40 - weiseeule_logger - INFO - Inside async def search_PubMed(query) and All the required files are found
+2024-11-28 16:23:48 - weiseeule_logger - INFO - Actual query is being searched is: what is the importance of phase separation in a protein protein interaction?
+2024-11-28 16:23:49 - weiseeule_logger - INFO - WebSocket disconnected

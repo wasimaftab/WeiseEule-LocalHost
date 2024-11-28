@@ -441,6 +441,17 @@ table#dataTable {
   border: 2px solid black;
 }
 
+/* style for toggled context */
+.toggle-symbol {
+  cursor: pointer;
+  color: blue;
+  margin-left: 5px;
+}
+
+.context-content {
+  margin-left: 20px;
+}
+
 /* Width of chat area when application is in full screen mode */
 @media screen and (min-width: 1200px) {
   #app {
