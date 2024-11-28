@@ -9,3 +9,9 @@ MedCPT_Embeddings/*.json
 
 # Ignore all .db files inside Local_DB
 Local_DB/*.db
+
+# Do not track __pycache__ folder
+pycodes/__pycache__
+
+# Do not track Logs folder
+pycodes/__pycache__
