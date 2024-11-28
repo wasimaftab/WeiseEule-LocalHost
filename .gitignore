@@ -14,4 +14,4 @@ Local_DB/*.db
 pycodes/__pycache__
 
 # Do not track Logs folder
-pycodes/__pycache__
+Logs
